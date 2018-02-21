@@ -1,5 +1,13 @@
-﻿@{
+﻿@using CodeDayOne.Models
+@model CodeDayOne.Models.Champion
+
+@{
     ViewData["Title"] = "Home Page";
+
+    var data = (Character)ViewData["Sona"];
 }
 
 Game Goes Here
+<br>
+<b>Champion Name: </b> @data.Name
+
