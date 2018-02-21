@@ -17,14 +17,14 @@ namespace CodeDayOne.Models
         public Character(string name, int health, int attackSpeed, int attack, 
                          int defense, int armor, int magicResist, List<Ability> abilityList)
         {
-            Name = name;
-            Health = health;
-            AttackSpeed = attackSpeed;
-            Attack = attack;
-            Defense = defense;
-            Armor = armor;
-            MagicResist = magicResist;
-            AbilityList = abilityList;
+            this.Name = name;
+            this.Health = health;
+            this.AttackSpeed = attackSpeed;
+            this.Attack = attack;
+            this.Defense = defense;
+            this.Armor = armor;
+            this.MagicResist = magicResist;
+            this.AbilityList = abilityList;
         }
     }
 }
