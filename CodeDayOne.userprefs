@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{9B7D92EC-8888-4153-822F-8F69A7A9024C}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CodeDayOne/Models/Minion.cs">
+    <Files>
+      <File FileName="CodeDayOne/Models/Character.cs" Line="1" Column="1" />
+      <File FileName="CodeDayOne/Champion.cs" Line="1" Column="1" />
+      <File FileName="CodeDayOne/Models/Champion.cs" Line="1" Column="1" />
+      <File FileName="CodeDayOne/Models/Minion.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.CodeDayOne PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>

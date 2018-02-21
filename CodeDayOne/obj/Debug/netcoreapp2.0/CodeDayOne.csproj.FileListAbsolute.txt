@@ -1,0 +1,11 @@
+/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/bin/Debug/netcoreapp2.0/CodeDayOne.deps.json
+/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/bin/Debug/netcoreapp2.0/CodeDayOne.runtimeconfig.json
+/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/bin/Debug/netcoreapp2.0/CodeDayOne.runtimeconfig.dev.json
+/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/bin/Debug/netcoreapp2.0/CodeDayOne.dll
+/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/bin/Debug/netcoreapp2.0/CodeDayOne.pdb
+/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/obj/Debug/netcoreapp2.0/CodeDayOne.csprojResolveAssemblyReference.cache
+/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/obj/Debug/netcoreapp2.0/CodeDayOne.csproj.CoreCompileInputs.cache
+/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/obj/Debug/netcoreapp2.0/CodeDayOne.AssemblyInfoInputs.cache
+/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/obj/Debug/netcoreapp2.0/CodeDayOne.AssemblyInfo.cs
+/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/obj/Debug/netcoreapp2.0/CodeDayOne.dll
+/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/obj/Debug/netcoreapp2.0/CodeDayOne.pdb
