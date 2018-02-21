@@ -28524,23 +28524,23 @@
     ]
   },
   "packageFolders": {
-    "/Users/Rizzo/.nuget/packages/": {},
+    "/Users/MDuffy/.nuget/packages/": {},
     "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/Rizzo/Documents/GitHub/CodeDay1/CodeDayOne/CodeDayOne.csproj",
+      "projectUniqueName": "/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/CodeDayOne.csproj",
       "projectName": "CodeDayOne",
-      "projectPath": "/Users/Rizzo/Documents/GitHub/CodeDay1/CodeDayOne/CodeDayOne.csproj",
-      "packagesPath": "/Users/Rizzo/.nuget/packages/",
-      "outputPath": "/Users/Rizzo/Documents/GitHub/CodeDay1/CodeDayOne/obj",
+      "projectPath": "/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/CodeDayOne.csproj",
+      "packagesPath": "/Users/MDuffy/.nuget/packages/",
+      "outputPath": "/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/Rizzo/.config/NuGet/NuGet.Config"
+        "/Users/MDuffy/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"

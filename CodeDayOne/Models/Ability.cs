@@ -7,4 +7,6 @@ namespace CodeDayOne.Models
         {
         }
     }
+
+    var test = new Minion("test");
 }
