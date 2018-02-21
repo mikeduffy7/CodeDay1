@@ -15,4 +15,7 @@
   <ItemGroup>
     <Compile Remove="Champion.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Home\Game.cshtml" />
+  </ItemGroup>
 </Project>

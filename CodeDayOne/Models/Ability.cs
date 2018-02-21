@@ -16,6 +16,4 @@ namespace CodeDayOne.Models
             this.CoolDown = coolDown;
         }
     }
-
-    var test = new Minion("test");
 }

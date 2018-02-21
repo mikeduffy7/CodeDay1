@@ -28530,11 +28530,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/CodeDayOne.csproj",
+      "projectUniqueName": "/Users/MDuffy/Projects/CodeDay1/CodeDayOne/CodeDayOne.csproj",
       "projectName": "CodeDayOne",
-      "projectPath": "/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/CodeDayOne.csproj",
+      "projectPath": "/Users/MDuffy/Projects/CodeDay1/CodeDayOne/CodeDayOne.csproj",
       "packagesPath": "/Users/MDuffy/.nuget/packages/",
-      "outputPath": "/Users/MDuffy/Projects/CodeDayOne/CodeDayOne/obj",
+      "outputPath": "/Users/MDuffy/Projects/CodeDay1/CodeDayOne/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
