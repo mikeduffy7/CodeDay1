@@ -2,96 +2,121 @@
     ViewData["Title"] = "Home Page";
 }
 
-
 @{
-<div class="row">
-    <div class="col-md-3">
-        <table class="table table-bordered">
-            <tr>
-                <td>Health: @ViewBag.championList[0].Health</td>
-            </tr>
-            <tr>
-                <td>Mana: @ViewBag.championList[0].Mana</td>
-            </tr>
-            <tr>
-                <td>Attack Speed: @ViewBag.championList[0].AttackSpeed</td>
-            </tr>
-            <tr>
-                <td>Attack: @ViewBag.championList[0].Attack</td>
-            </tr>
-            <tr>
-                <td>Defense: @ViewBag.championList[0].Defense</td>
-            </tr>
-            <tr>
-                <td>Armor: @ViewBag.championList[0].Armor</td>
-            </tr>
-            <tr>
-                <td>Magic Resist: @ViewBag.championList[0].MagicResist</td>
-            </tr>
-        </table>
+    <!-- This row creates a toggle switch to allow us to pick either Player 1 or
+        Player 2 and then click on a champion below to switch their champion. -->
+    <div class="row">
+        <form>
+            <div>
+                <input type="radio" id="playerChoice1" name="playerSelect" value="player1" />
+                <label for="playerChoice1">Player 1</label>
+                <input type="radio" id="playerChoice2" name="playerSelect" value="player2" />
+                <label for="playerChoice2">Player 2</label>
+            </div>
+        </form>
     </div>
-    <div class="col-md-3">
-        <h1>@ViewBag.championList[0].Name</h1>
-    </div>
-    <div class="col-md-3">
-        <table class="table table-bordered">
-            <tr>
-                <td>Health: @ViewBag.championList[1].Health</td>
-            </tr>
-            <tr>
-                <td>Mana: @ViewBag.championList[1].Mana</td>
-            </tr>
-            <tr>
-                <td>Attack Speed: @ViewBag.championList[1].AttackSpeed</td>
-            </tr>
-            <tr>
-                <td>Attack: @ViewBag.championList[1].Attack</td>
-            </tr>
-            <tr>
-                <td>Defense: @ViewBag.championList[1].Defense</td>
-            </tr>
-            <tr>
-                <td>Armor: @ViewBag.championList[1].Armor</td>
-            </tr>
-            <tr>
-                <td>Magic Resist: @ViewBag.championList[1].MagicResist</td>
-            </tr>
-        </table>
-        
-    </div>
-    <div class="col-md-3">
-        <h1>@ViewBag.championList[1].Name</h1>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        <table class="table table-bordered">
-            <tr>
-                <td><button type="button" class="btn btn-primary">@ViewBag.championList[0].AbilityList[0].Name</button></td>
-                <td><button type="button" class="btn btn-success">@ViewBag.championList[0].AbilityList[1].Name</button></td>
-            </tr>
-            <tr>
-                <td><button type="button" class="btn btn-info">@ViewBag.championList[0].AbilityList[2].Name</button></td>
-                <td><button type="button" class="btn btn-danger">@ViewBag.championList[0].AbilityList[3].Name</button></td>
-            </tr>
-        </table>
-    </div>
-    <div class="col-md-6">
-        <table class="table table-bordered">
-            <tr>
-                <td><button type="button" class="btn btn-primary">@ViewBag.championList[1].AbilityList[0].Name</button></td>
-                <td><button type="button" class="btn btn-success">@ViewBag.championList[1].AbilityList[1].Name</button></td>
-            </tr>
-            <tr>
-                <td><button type="button" class="btn btn-info">@ViewBag.championList[1].AbilityList[2].Name</button></td>
-                <td><button type="button" class="btn btn-danger">@ViewBag.championList[1].AbilityList[3].Name</button></td>
-            </tr>
-        </table>
-    </div>
-</div>
 
+    <hr />
 
-    
-    
-    
+    <!-- This row creates a button for each champion in ViewBag.championList and 
+        displays an image for all champions in the button. -->
+    <div class="row">
+        @foreach (Champion champion in ViewBag.championList)
+        {
+            <button onclick="selectChampion(champion)">
+                <img src="@champion.ImageSource" alt="@champion.Name Image" />
+            </button>
+        }
+        <!-- <img src="https://ddragon.leagueoflegends.com/cdn/8.3.1/img/champion/ + @ViewBag.championList[0].Name + .png" alt="Image" /> -->
+    </div>
+
+    <hr />
+
+    <!-- This row displays both champions' information in table form.
+        Currently it defaults to the first two members of the list. -->
+    <div class="row">
+        <div class="col-md-3">
+            <table class="table table-bordered">
+                <tr>
+                    <td>Health: @ViewBag.championList[0].Health</td>
+                </tr>
+                <tr>
+                    <td>Mana: @ViewBag.championList[0].Mana</td>
+                </tr>
+                <tr>
+                    <td>Attack Speed: @ViewBag.championList[0].AttackSpeed</td>
+                </tr>
+                <tr>
+                    <td>Attack: @ViewBag.championList[0].Attack</td>
+                </tr>
+                <tr>
+                    <td>Defense: @ViewBag.championList[0].Defense</td>
+                </tr>
+                <tr>
+                    <td>Armor: @ViewBag.championList[0].Armor</td>
+                </tr>
+                <tr>
+                    <td>Magic Resist: @ViewBag.championList[0].MagicResist</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-3">
+            <h1>@ViewBag.championList[0].Name</h1>
+        </div>
+        <div class="col-md-3">
+            <table class="table table-bordered">
+                <tr>
+                    <td>Health: @ViewBag.championList[1].Health</td>
+                </tr>
+                <tr>
+                    <td>Mana: @ViewBag.championList[1].Mana</td>
+                </tr>
+                <tr>
+                    <td>Attack Speed: @ViewBag.championList[1].AttackSpeed</td>
+                </tr>
+                <tr>
+                    <td>Attack: @ViewBag.championList[1].Attack</td>
+                </tr>
+                <tr>
+                    <td>Defense: @ViewBag.championList[1].Defense</td>
+                </tr>
+                <tr>
+                    <td>Armor: @ViewBag.championList[1].Armor</td>
+                </tr>
+                <tr>
+                    <td>Magic Resist: @ViewBag.championList[1].MagicResist</td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="col-md-3">
+            <h1>@ViewBag.championList[1].Name</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <tr>
+                    <td><button type="button" class="btn btn-primary">@ViewBag.championList[0].AbilityList[0].Name</button></td>
+                    <td><button type="button" class="btn btn-success">@ViewBag.championList[0].AbilityList[1].Name</button></td>
+                </tr>
+                <tr>
+                    <td><button type="button" class="btn btn-info">@ViewBag.championList[0].AbilityList[2].Name</button></td>
+                    <td><button type="button" class="btn btn-danger">@ViewBag.championList[0].AbilityList[3].Name</button></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <tr>
+                    <td><button type="button" class="btn btn-primary">@ViewBag.championList[1].AbilityList[0].Name</button></td>
+                    <td><button type="button" class="btn btn-success">@ViewBag.championList[1].AbilityList[1].Name</button></td>
+                </tr>
+                <tr>
+                    <td><button type="button" class="btn btn-info">@ViewBag.championList[1].AbilityList[2].Name</button></td>
+                    <td><button type="button" class="btn btn-danger">@ViewBag.championList[1].AbilityList[3].Name</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 }
