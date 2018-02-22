@@ -8,6 +8,8 @@ namespace CodeDayOne.Models
     public class Game
     {
         public List<Champion> ChampionList { get; set; }
+        public Champion Player1 { get; set; }
+        public Champion Player2 { get; set; }
 
         public Game()
         {
@@ -72,7 +74,10 @@ namespace CodeDayOne.Models
             ChampionList.Add(Lux);
             ChampionList.Add(Malphite);
             ChampionList.Add(Sona);
-            
+
+            Player1 = ChampionList.ElementAt(0);
+            Player2 = ChampionList.ElementAt(1);
+
             return ChampionList;
         }
     }

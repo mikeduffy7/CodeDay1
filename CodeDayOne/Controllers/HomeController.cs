@@ -13,14 +13,13 @@ namespace CodeDayOne.Controllers
         public IActionResult Index()
         {
             Game game = new Models.Game();
-            //var champList = game.LoadChampions();
-            //ViewBag.championList = champList;
 
             ViewBag.championList = game.LoadChampions();
+            ViewBag.player1 = game.Player1;
+            ViewBag.payer2 = game.Player2;
 
             return View();
         }
-
 
         public IActionResult About()
         {

@@ -17,17 +17,16 @@
     </div>
 
     <hr />
-
+    
     <!-- This row creates a button for each champion in ViewBag.championList and 
         displays an image for all champions in the button. -->
     <div class="row">
         @foreach (Champion champion in ViewBag.championList)
         {
-            <button onclick="selectChampion(champion)">
+            <button>
                 <img src="@champion.ImageSource" alt="@champion.Name Image" />
             </button>
         }
-        <!-- <img src="https://ddragon.leagueoflegends.com/cdn/8.3.1/img/champion/ + @ViewBag.championList[0].Name + .png" alt="Image" /> -->
     </div>
 
     <hr />
@@ -38,30 +37,30 @@
         <div class="col-md-3">
             <table class="table table-bordered">
                 <tr>
-                    <td>Health: @ViewBag.championList[0].Health</td>
+                    <td>Health: @ViewBag.player1.Health</td>
                 </tr>
                 <tr>
-                    <td>Mana: @ViewBag.championList[0].Mana</td>
+                    <td>Mana: @ViewBag.player1.Mana</td>
                 </tr>
                 <tr>
-                    <td>Attack Speed: @ViewBag.championList[0].AttackSpeed</td>
+                    <td>Attack Speed: @ViewBag.player1.AttackSpeed</td>
                 </tr>
                 <tr>
-                    <td>Attack: @ViewBag.championList[0].Attack</td>
+                    <td>Attack: @ViewBag.player1.Attack</td>
                 </tr>
                 <tr>
-                    <td>Defense: @ViewBag.championList[0].Defense</td>
+                    <td>Defense: @ViewBag.player1.Defense</td>
                 </tr>
                 <tr>
-                    <td>Armor: @ViewBag.championList[0].Armor</td>
+                    <td>Armor: @ViewBag.player1.Armor</td>
                 </tr>
                 <tr>
-                    <td>Magic Resist: @ViewBag.championList[0].MagicResist</td>
+                    <td>Magic Resist: @ViewBag.player1.MagicResist</td>
                 </tr>
             </table>
         </div>
         <div class="col-md-3">
-            <h1>@ViewBag.championList[0].Name</h1>
+            <h1>@ViewBag.player1.Name</h1>
         </div>
         <div class="col-md-3">
             <table class="table table-bordered">
@@ -97,12 +96,12 @@
         <div class="col-md-6">
             <table class="table table-bordered">
                 <tr>
-                    <td><button type="button" class="btn btn-primary">@ViewBag.championList[0].AbilityList[0].Name</button></td>
-                    <td><button type="button" class="btn btn-success">@ViewBag.championList[0].AbilityList[1].Name</button></td>
+                    <td><button type="button" class="btn btn-primary">@ViewBag.player1.AbilityList[0].Name</button></td>
+                    <td><button type="button" class="btn btn-success">@ViewBag.player1.AbilityList[1].Name</button></td>
                 </tr>
                 <tr>
-                    <td><button type="button" class="btn btn-info">@ViewBag.championList[0].AbilityList[2].Name</button></td>
-                    <td><button type="button" class="btn btn-danger">@ViewBag.championList[0].AbilityList[3].Name</button></td>
+                    <td><button type="button" class="btn btn-info">@ViewBag.player1.AbilityList[2].Name</button></td>
+                    <td><button type="button" class="btn btn-danger">@ViewBag.player1.AbilityList[3].Name</button></td>
                 </tr>
             </table>
         </div>
