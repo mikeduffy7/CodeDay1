@@ -6,4 +6,5 @@
 *.suo
 *.user
 *.ncb
-
+*.pdb
+*.csproj.CoreCompileInputs.cache
