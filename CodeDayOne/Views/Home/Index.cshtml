@@ -11,10 +11,10 @@
     <div class="row">
         <form>
             <div>
-                <input type="radio" id="playerChoice1" name="playerSelect" value="player1" />
-                <label for="playerChoice1">Player 1</label>
-                <input type="radio" id="playerChoice2" name="playerSelect" value="player2" />
-                <label for="playerChoice2">Player 2</label>
+                <input type="radio" id="partyMember1" name="playerSelect" value="partyMember1" />
+                <label for="playerChoice1">Party Member 1</label>
+                <input type="radio" id="partyMember2" name="playerSelect" value="partyMember2" />
+                <label for="playerChoice2">Party Member 2</label>
             </div>
         </form>
     </div>
@@ -24,15 +24,26 @@
     <!-- This row creates a button for each champion in ViewBag.championList and 
         displays an image for all champions in the button. -->
     <div class="row">
-        @foreach (Champion champion in ViewBag.championList)
+        @for (var i = 0; i < ViewBag.championList.Count; i++)
         {
-            <button>
-                <img src="@champion.ImageSource" alt="@champion.Name Image" />
+            <button value="@i" onclick="changeChampion(this.value)">
+                <img src="@ViewBag.championList[i].ImageSource" />
             </button>
         }
+        <!-- @foreach (Champion champion in ViewBag.championList)
+        {
+            <button id="@champion.Name" value="@champion" onclick="changeChampion(this.value)">
+                <img src="@champion.ImageSource" alt="@champion.Name Image" />
+            </button>
+        } -->
     </div>
 
+
     <hr />
+
+    <div id="championData">
+        
+    </div>
 
     <!-- This row displays both champions' information in table form.
         Currently it defaults to the first two members of the list. -->

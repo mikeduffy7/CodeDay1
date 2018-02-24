@@ -16,33 +16,14 @@ namespace CodeDayOne.Controllers
 
             ViewBag.championList = game.LoadChampions();
             ViewBag.player1 = game.Player1;
-            ViewBag.payer2 = game.Player2;
+            ViewBag.player2 = game.Player2;
 
             return View();
         }
 
-        public IActionResult About()
+        public void changeChampion(Champion champion)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public IActionResult Game()
-        {
-            return View();
+            
         }
     }
 }

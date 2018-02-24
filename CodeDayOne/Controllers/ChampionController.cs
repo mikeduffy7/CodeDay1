@@ -25,6 +25,8 @@ namespace CodeDayOne.Controllers
             var character = new Character("Sona");
             ViewData["Sona"] = character;
 
+
+
             return View("Index");
         }
     }
