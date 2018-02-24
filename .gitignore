@@ -1,5 +1,5 @@
-.userprefs
-.dll
-.pbd
-.dev.json
-.nuget.cache
+*.userprefs
+*.dll
+*.pbd
+*.dev.json
+*.nuget.cache
