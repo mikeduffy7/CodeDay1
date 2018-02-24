@@ -1,5 +1,9 @@
-CodeDayOne.userprefs
+*.userprefs
 *.dll
 *.pbd
 *.dev.json
 *.nuget.cache
+*.suo
+*.user
+*.ncb
+
