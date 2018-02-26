@@ -6,130 +6,16 @@
 }
 
 @{
-    <!-- This row creates a toggle switch to allow us to pick either Player 1 or
-        Player 2 and then click on a champion below to switch their champion. -->
-    <div class="row">
-        <form>
-            <div>
-                <input type="radio" id="partyMember1" name="playerSelect" value="partyMember1" />
-                <label for="playerChoice1">Party Member 1</label>
-                <input type="radio" id="partyMember2" name="playerSelect" value="partyMember2" />
-                <label for="playerChoice2">Party Member 2</label>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="https://lolstatic-a.akamaihd.net/frontpage/apps/prod/playnow-global/en_US/b57628ada646a1c44a4d59fd73ca3a0955b3bf15/assets/img/lol-logo.png" />
             </div>
-        </form>
-    </div>
-
-    <hr />
-    
-    <!-- This row creates a button for each champion in ViewBag.championList and 
-        displays an image for all champions in the button. -->
-    <div class="row">
-        @for (var i = 0; i < ViewBag.championList.Count; i++)
-        {
-            <button value="@i" onclick="changeChampion(this.value)">
-                <img src="@ViewBag.championList[i].ImageSource" />
-            </button>
-        }
-        <!-- @foreach (Champion champion in ViewBag.championList)
-        {
-            <button id="@champion.Name" value="@champion" onclick="changeChampion(this.value)">
-                <img src="@champion.ImageSource" alt="@champion.Name Image" />
-            </button>
-        } -->
-    </div>
-
-
-    <hr />
-
-    <div id="championData">
-        
-    </div>
-
-    <!-- This row displays both champions' information in table form.
-        Currently it defaults to the first two members of the list. -->
-    <div class="row">
-        <div class="col-md-3">
-            <table class="table table-bordered">
-                <tr>
-                    <td>Health: @ViewBag.player1.Health</td>
-                </tr>
-                <tr>
-                    <td>Mana: @ViewBag.player1.Mana</td>
-                </tr>
-                <tr>
-                    <td>Attack Speed: @ViewBag.player1.AttackSpeed</td>
-                </tr>
-                <tr>
-                    <td>Attack: @ViewBag.player1.Attack</td>
-                </tr>
-                <tr>
-                    <td>Defense: @ViewBag.player1.Defense</td>
-                </tr>
-                <tr>
-                    <td>Armor: @ViewBag.player1.Armor</td>
-                </tr>
-                <tr>
-                    <td>Magic Resist: @ViewBag.player1.MagicResist</td>
-                </tr>
-            </table>
         </div>
-        <div class="col-md-3">
-            <h1>@ViewBag.player1.Name</h1>
-        </div>
-        <div class="col-md-3">
-            <table class="table table-bordered">
-                <tr>
-                    <td>Health: @ViewBag.Player2.Health</td>
-                </tr>
-                <tr>
-                    <td>Mana: @ViewBag.Player2.Mana</td>
-                </tr>
-                <tr>
-                    <td>Attack Speed: @ViewBag.Player2.AttackSpeed</td>
-                </tr>
-                <tr>
-                    <td>Attack: @ViewBag.Player2.Attack</td>
-                </tr>
-                <tr>
-                    <td>Defense: @ViewBag.Player2.Defense</td>
-                </tr>
-                <tr>
-                    <td>Armor: @ViewBag.Player2.Armor</td>
-                </tr>
-                <tr>
-                    <td>Magic Resist: @ViewBag.Player2.MagicResist</td>
-                </tr>
-            </table>
-
-        </div>
-        <div class="col-md-3">
-            <h1>@ViewBag.Player2.Name</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <table class="table table-bordered">
-                <tr>
-                    <td><button type="button" class="btn btn-primary">@ViewBag.player1.AbilityList[0].Name</button></td>
-                    <td><button type="button" class="btn btn-success">@ViewBag.player1.AbilityList[1].Name</button></td>
-                </tr>
-                <tr>
-                    <td><button type="button" class="btn btn-info">@ViewBag.player1.AbilityList[2].Name</button></td>
-                    <td><button type="button" class="btn btn-danger">@ViewBag.player1.AbilityList[3].Name</button></td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-md-6">
-            <table class="table table-bordered">
-                <tr>
-                    <td><button type="button" class="btn btn-primary">@ViewBag.Player2.AbilityList[0].Name</button></td>
-                    <td><button type="button" class="btn btn-success">@ViewBag.Player2.AbilityList[1].Name</button></td>
-                </tr>
-                <tr>
-                    <td><button type="button" class="btn btn-info">@ViewBag.Player2.AbilityList[2].Name</button></td>
-                    <td><button type="button" class="btn btn-danger">@ViewBag.Player2.AbilityList[3].Name</button></td>
-                </tr>
-            </table>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" onclick="location.href='@Url.Action("PartySelect", "Game")'">Select Party</button>
+            </div>
         </div>
     </div>
 }

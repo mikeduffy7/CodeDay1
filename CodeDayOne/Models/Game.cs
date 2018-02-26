@@ -10,6 +10,8 @@ namespace CodeDayOne.Models
         public List<Champion> ChampionList { get; set; }
         public Champion Player1 { get; set; }
         public Champion Player2 { get; set; }
+        public int Player1Index { get; set; }
+        public int Player2Index { get; set; }
 
         public Game()
         {

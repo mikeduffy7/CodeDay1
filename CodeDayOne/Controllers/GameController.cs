@@ -20,11 +20,20 @@ namespace CodeDayOne.Controllers
             return View(game);
         }
 
-        public ActionResult ChangeChampion(int champIndex)
+        public ActionResult SelectPartyMember1(int champIndex)
         {
             game.ChampionList = game.LoadChampions();
             game.Player1 = game.ChampionList[champIndex];
-            Console.Write("Party Member #1: " + game.Player1.Name);
+            game.Player1Index = champIndex;
+            return View(game);
+        }
+        public ActionResult SelectPartyMember2(int champIndex, int player1Index)
+        {
+            game.ChampionList = game.LoadChampions();
+            game.Player1 = game.ChampionList[player1Index];
+            game.Player1Index = player1Index;
+            game.Player2 = game.ChampionList[champIndex];
+            game.Player2Index = champIndex;
             return View(game);
         }
     }
