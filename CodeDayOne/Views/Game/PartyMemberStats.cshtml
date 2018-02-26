@@ -1,30 +1,5 @@
 ﻿@model CodeDayOne.Models.Game
-@{
-    ViewData["Title"] = "PartySelect";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
-
-
-
-<h2>Party Member #1 - Select</h2>
-
-<div class="row">
-    @for (var i = 0; i < Model.ChampionList.Count; i++)
-    {
-        <button class="champButton" type="button" value="@i" onclick="location.href='@Url.Action("SelectPartyMember1", "Game", new { champIndex = i })'">
-            <img src="@Model.ChampionList[i].ImageSource" />
-        </button>
-    }
-</div>
-
-<hr />
-<div id="partyMemberStats">
-    @Html.Partial("PartyMemberStats")
-</div>
-
-<!-- This row displays both champions' information in table form.
-    Currently it defaults to the first two members of the list.
 <div class="row">
     <div class="col-md-3">
         <table class="table table-bordered">
@@ -109,4 +84,4 @@
             </tr>
         </table>
     </div>
-</div> -->
+</div>

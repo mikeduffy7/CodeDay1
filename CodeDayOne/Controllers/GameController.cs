@@ -36,5 +36,14 @@ namespace CodeDayOne.Controllers
             game.Player2Index = champIndex;
             return View(game);
         }
+
+        public ActionResult PartyMemberStats(int champIndex)
+        {
+            Console.Write("PartyMemberStats action has run!");
+            game.ChampionList = game.LoadChampions();
+            game.Player1 = game.ChampionList[champIndex];
+            game.Player1Index = champIndex;
+            return PartialView(game);
+        }
     }
 }
