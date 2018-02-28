@@ -28,10 +28,5 @@ namespace CodeDayOne.Models
             this.MagicResist = magicResist;
             this.AbilityList = abilityList;
         }
-
-        public Character(string name)
-        {
-            this.Name = name;
-        }
     }
 }

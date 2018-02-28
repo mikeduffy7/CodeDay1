@@ -8,6 +8,7 @@ namespace CodeDayOne.Models
     public class Game
     {
         public List<Champion> ChampionList { get; set; }
+        public List<Minion> MinionList { get; set; }
         public Champion Player1 { get; set; }
         public Champion Player2 { get; set; }
         public int Player1Index { get; set; }
@@ -16,6 +17,33 @@ namespace CodeDayOne.Models
         public Game()
         {
             ChampionList = new List<Champion>();
+            MinionList = new List<Minion>();
+        }
+
+        public List<Minion> LoadMinions()
+        {
+            var meleeMinion = new Minion("Melee Minion", 455, 2, 12, 15, 0, 0, new List<Ability>(), 20, 59);
+            meleeMinion.BlueImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/6/65/Blue_Melee_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204557";
+            meleeMinion.RedImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/e/ea/Red_Melee_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204552";
+
+            var casterMinion = new Minion("Caster Minion", 308, 1, 22, 15, 0, 0, new List<Ability>(), 17, 29);
+            casterMinion.BlueImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/f/fa/Blue_Caster_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204553";
+            casterMinion.RedImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/1/10/Red_Caster_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204552";
+
+            var siegeMinion = new Minion("Siege Minion", 805, 1, 40, 15, 0, 0, new List<Ability>(), 45, 92);
+            siegeMinion.BlueImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/6/6c/Blue_Siege_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204558";
+            siegeMinion.RedImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/c/c1/Red_Siege_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204553";
+
+            var superMinion = new Minion("Super Minion", 2000, 1, 190, 15, 30, -30, new List<Ability>(), 40, 97);
+            superMinion.BlueImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/4/4a/Blue_Super_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204557";
+            superMinion.RedImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/0/04/Red_Super_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204553";
+
+            MinionList.Add(meleeMinion);
+            MinionList.Add(casterMinion);
+            MinionList.Add(siegeMinion);
+            MinionList.Add(superMinion);
+
+            return MinionList;
         }
 
         public List<Champion> LoadChampions()
