@@ -15,6 +15,7 @@ namespace CodeDayOne.Controllers
             Game game = new Models.Game();
 
             ViewBag.championList = game.LoadChampions();
+            ViewBag.minionList = game.LoadMinions();
             ViewBag.player1 = game.Player1;
             ViewBag.player2 = game.Player2;
 

@@ -9,7 +9,7 @@
 <div class="row">
     @for (var i = 0; i < Model.ChampionList.Count; i++)
     {
-        <button class="champButton" type="button" value="@i" onclick="location.href='@Url.Action("SelectPartyMember1", "Game", new { champIndex = i })'" >
+        <button class="champButton" type="button" value="@i" onclick="location.href='@Url.Action("SelectPartyMember1", "Game", new { champIndex = i })'">
             <img src="@Model.ChampionList[i].ImageSource" />
         </button>
     }
