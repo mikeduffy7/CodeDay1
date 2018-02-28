@@ -40,11 +40,22 @@ namespace CodeDayOne.Controllers
 
         public ActionResult PartyMemberStats(int champIndex)
         {
-            Console.Write("PartyMemberStats action has run!");
             game.ChampionList = game.LoadChampions();
             game.Player1 = game.ChampionList[champIndex];
             game.Player1Index = champIndex;
             return PartialView(game);
+        }
+
+        public IActionResult BattleScreen(int player1Index, int player2Index)
+        {
+            game.ChampionList = game.LoadChampions();
+            game.Player1 = game.ChampionList[player1Index];
+            game.Player1Index = player1Index;
+            game.Player2 = game.ChampionList[player2Index];
+            game.Player2Index = player2Index;
+            game.MinionList = game.LoadMinions();
+            ViewBag.MinionList = game.LoadMinions();
+            return View(game);
         }
     }
 }

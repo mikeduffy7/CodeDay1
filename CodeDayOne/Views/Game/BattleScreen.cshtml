@@ -1,0 +1,77 @@
+﻿@model CodeDayOne.Models.Game
+@{
+    ViewData["Title"] = "BattleScreen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>BattleScreen</h2>
+<button class="btn btn-danger" type="button" onclick="createMinionHorde(@Model.MinionList.Count)">Random Minion Horde</button>
+
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="@Model.Player1.ImageSource" />
+                </div>
+                <div class="col-md-6">
+                    <h3><img src="https://i.imgur.com/fXyXzCk.png" /> <font color="red">@Model.Player1.CurrentHealth/@Model.Player1.MaxHealth</font></h3>
+                    <h3><img src="https://i.imgur.com/kAPA7h3.png" /> <font color="blue">@Model.Player1.CurrentMana/@Model.Player1.MaxMana</font></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td><button type="button" class="btn btn-primary">@Model.Player1.AbilityList[0].Name</button></td>
+                            <td><button type="button" class="btn btn-success">@Model.Player1.AbilityList[1].Name</button></td>
+                        </tr>
+                        <tr>
+                            <td><button type="button" class="btn btn-info">@Model.Player1.AbilityList[2].Name</button></td>
+                            <td><button type="button" class="btn btn-danger">@Model.Player1.AbilityList[3].Name</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="@Model.Player2.ImageSource" />
+                </div>
+                <div class="col-md-6">
+                    <h3><img src="https://i.imgur.com/fXyXzCk.png" /> <font color="red">@Model.Player2.CurrentHealth/@Model.Player2.MaxHealth</font></h3>
+                    <h3><img src="https://i.imgur.com/kAPA7h3.png" /> <font color="blue">@Model.Player2.CurrentMana/@Model.Player2.MaxMana</font></h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <td><button type="button" class="btn btn-primary">@Model.Player2.AbilityList[0].Name</button></td>
+                            <td><button type="button" class="btn btn-success">@Model.Player2.AbilityList[1].Name</button></td>
+                        </tr>
+                        <tr>
+                            <td><button type="button" class="btn btn-info">@Model.Player2.AbilityList[2].Name</button></td>
+                            <td><button type="button" class="btn btn-danger">@Model.Player2.AbilityList[3].Name</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="minionBattleList" class="col-md-4">
+            <h1>Minion List</h1>
+        </div>
+    </div>
+</div>
+
+@{ 
+<script>
+    function createMinionHorde(minionListCount)
+    {
+        var randomIndex = Math.floor((Math.random() * minionListCount) + 1);
+        var minionName = ViewBag.MinionList[randomIndex].Name;
+        document.getElementById('minionBattleList').innerHTML = minionName;
+    }
+</script>
+}

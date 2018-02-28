@@ -12,7 +12,7 @@
     </div>
     <div class="row">
         <div class="col-md-6 text-right">
-            <button onclick="location.href='@Url.Action("Index", "Home")'" type="button" class="btn btn-success">To The Fields of Justice</button>
+            <button onclick="location.href='@Url.Action("BattleScreen", "Game", new { player1Index = @Model.Player1Index, player2Index = Model.Player2Index })'" type="button" class="btn btn-success">To The Fields of Justice</button>
         </div>
         <div class="col-md-6 text-left">
             <button onclick="location.href='@Url.Action("PartySelect", "Game")'" type="button" class="btn btn-danger">Reselect Party Members</button>
