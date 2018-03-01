@@ -9,15 +9,21 @@ namespace CodeDayOne.Models
     {
         public List<Champion> ChampionList { get; set; }
         public List<Minion> MinionList { get; set; }
+        public List<Minion> BattleMinionList { get; set; }
         public Champion Player1 { get; set; }
         public Champion Player2 { get; set; }
         public int Player1Index { get; set; }
         public int Player2Index { get; set; }
+        public Minion MeleeMinion { get; set; }
+        public Minion CasterMinion { get; set; }
+        public Minion SiegeMinion { get; set; }
+        public Minion SuperMinion { get; set; }
 
         public Game()
         {
             ChampionList = new List<Champion>();
             MinionList = new List<Minion>();
+            BattleMinionList = new List<Minion>();
         }
 
         public List<Minion> LoadMinions()
@@ -37,6 +43,11 @@ namespace CodeDayOne.Models
             var superMinion = new Minion("Super Minion", 2000, 1, 190, 15, 30, -30, new List<Ability>(), 40, 97);
             superMinion.BlueImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/4/4a/Blue_Super_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204557";
             superMinion.RedImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/0/04/Red_Super_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204553";
+
+            MeleeMinion = meleeMinion;
+            CasterMinion = casterMinion;
+            SiegeMinion = siegeMinion;
+            SuperMinion = superMinion;
 
             MinionList.Add(meleeMinion);
             MinionList.Add(casterMinion);

@@ -1,11 +1,15 @@
 ﻿@model CodeDayOne.Models.Game
+
+<script type="text/javascript" src="js/script.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
 @{
     ViewData["Title"] = "BattleScreen";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>BattleScreen</h2>
-<button class="btn btn-danger" type="button" onclick="createMinionHorde(@Model.MinionList.Count)">Random Minion Horde</button>
+<button class="btn btn-danger" type="button" href="@Url.Action("CreateMinionHorde", "GameController")" >Random Minion Horde</button>
 
 <div>
     <div class="row">
@@ -60,18 +64,13 @@
             </div>
         </div>
         <div id="minionBattleList" class="col-md-4">
-            <h1>Minion List</h1>
+            @if (Model.BattleMinionList.Count > 0)
+            {
+                @for (var i = 0; i < Model.MinionList.Count; i++)
+                {
+                    <img src="@Model.BattleMinionList[i].BlueImageURL" />
+                }
+            }
         </div>
     </div>
 </div>
-
-@{ 
-<script>
-    function createMinionHorde(minionListCount)
-    {
-        var randomIndex = Math.floor((Math.random() * minionListCount) + 1);
-        var minionName = ViewBag.MinionList[randomIndex].Name;
-        document.getElementById('minionBattleList').innerHTML = minionName;
-    }
-</script>
-}
