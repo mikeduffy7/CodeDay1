@@ -22,11 +22,6 @@ namespace CodeDayOne.Controllers
             return View();
         }
 
-        public IActionResult GameBoard()
-        {
-            return View();
-        }
-
         public void changeChampion(Champion champion)
         {
             

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Windows;
 using CodeDayOne.Models;
 
 namespace CodeDayOne.Controllers
@@ -11,6 +12,14 @@ namespace CodeDayOne.Controllers
     {
         public Game game = new Game();
 
+
+        public IActionResult GameBoard()
+        {
+            // create window to work in
+            var mainWindow = new Window();
+
+            return View();
+        }
 
         // GET: Game
         public IActionResult PartySelect()
