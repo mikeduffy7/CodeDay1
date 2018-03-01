@@ -16,7 +16,7 @@ namespace CodeDayOne.Controllers
         public IActionResult GameBoard()
         {
             // create window to work in
-            var mainWindow = new Window();
+            //var mainWindow = new Window();
 
             return View();
         }
@@ -78,6 +78,12 @@ namespace CodeDayOne.Controllers
                 int index = random.Next(game.MinionList.Count);
                 game.BattleMinionList.Add(game.MinionList.ElementAt(index));
             }
+        }
+
+        public ActionResult DisplayMinionHorde()
+        {
+
+            return PartialView("_MinionList");
         }
     }
 }
