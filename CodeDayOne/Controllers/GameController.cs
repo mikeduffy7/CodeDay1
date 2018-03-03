@@ -16,7 +16,7 @@ namespace CodeDayOne.Controllers
         public IActionResult GameBoard()
         {
             // create window to work in
-            var mainWindow = new Window();
+            //Canvas canvas = new Canvas();
 
             return View();
         }
