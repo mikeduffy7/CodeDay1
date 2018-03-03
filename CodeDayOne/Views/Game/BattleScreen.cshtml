@@ -64,12 +64,24 @@
             </div>
         </div>
         <div id="minionBattleList" class="col-md-4">
-            @if (Model.BattleMinionList.Count > 0)
+            @foreach (var minion in Model.MinionList)
             {
-                @for (var i = 0; i < Model.MinionList.Count; i++)
-                {
-                    <img src="@Model.BattleMinionList[i].BlueImageURL" />
-                }
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="@minion.RedImageURL" />
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @minion.Name
+                            </div>
+                            <div class="col-md-12">
+                                <img src="https://i.imgur.com/fXyXzCk.png" /> @minion.CurrentHealth/@minion.MaxHealth
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             }
         </div>
     </div>

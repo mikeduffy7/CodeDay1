@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Windows;
 using CodeDayOne.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CodeDayOne.Controllers
 {
@@ -16,7 +17,7 @@ namespace CodeDayOne.Controllers
         public IActionResult GameBoard()
         {
             // create window to work in
-            //Canvas canvas = new Canvas();
+            // Canvas canvas = new Canvas();
 
             return View();
         }
@@ -64,6 +65,7 @@ namespace CodeDayOne.Controllers
             game.Player2 = game.ChampionList[player2Index];
             game.Player2Index = player2Index;
             game.MinionList = game.LoadMinions();
+
             return View(game);
         }
 
@@ -78,6 +80,12 @@ namespace CodeDayOne.Controllers
                 int index = random.Next(game.MinionList.Count);
                 game.BattleMinionList.Add(game.MinionList.ElementAt(index));
             }
+        }
+
+        public ActionResult DisplayMinionHorde()
+        {
+
+            return PartialView("_MinionList");
         }
     }
 }
