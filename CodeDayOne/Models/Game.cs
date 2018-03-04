@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
 
 namespace CodeDayOne.Models
@@ -10,6 +11,7 @@ namespace CodeDayOne.Models
         public List<Champion> ChampionList { get; set; }
         public List<Minion> MinionList { get; set; }
         public List<Minion> BattleMinionList { get; set; }
+        public SelectList MinionSelectList { get; set; }
         public Champion Player1 { get; set; }
         public Champion Player2 { get; set; }
         public int Player1Index { get; set; }
@@ -120,6 +122,21 @@ namespace CodeDayOne.Models
             Player2 = ChampionList.ElementAt(1);
 
             return ChampionList;
+        }
+
+        public void CreateAbilitySelectList()
+        {
+            foreach (Champion champ in ChampionList)
+            {
+                champ.AbilitySelectList = new SelectList(new[]
+                {
+                    new { ID = "1", Name = champ.AbilityList.ElementAt(0).Name },
+                    new { ID = "2", Name = champ.AbilityList.ElementAt(1).Name },
+                    new { ID = "3", Name = champ.AbilityList.ElementAt(2).Name },
+                    new { ID = "4", Name = champ.AbilityList.ElementAt(3).Name },
+                },
+                "ID", "Name", 1);
+            }
         }
     }
 }

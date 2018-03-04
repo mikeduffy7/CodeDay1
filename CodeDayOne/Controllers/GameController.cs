@@ -60,6 +60,7 @@ namespace CodeDayOne.Controllers
         public IActionResult BattleScreen(int player1Index, int player2Index)
         {
             game.ChampionList = game.LoadChampions();
+            game.CreateAbilitySelectList();
             game.Player1 = game.ChampionList[player1Index];
             game.Player1Index = player1Index;
             game.Player2 = game.ChampionList[player2Index];

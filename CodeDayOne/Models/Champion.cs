@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 
 namespace CodeDayOne.Models
@@ -9,6 +10,7 @@ namespace CodeDayOne.Models
         public int CurrentMana { get; set; }
         public int XP { get; set; }
         public string ImageSource { get; set; }
+        public SelectList AbilitySelectList { get; set; }
 
         public Champion(string name, int maxHealth, int attackSpeed, int attack,
                          int defense, int armor, int magicResist, List<Ability> abilityList, int maxMana) 

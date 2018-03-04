@@ -25,6 +25,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    @Html.DropDownListFor(x => x.Player1.AbilitySelectList, Model.Player1.AbilitySelectList)
                     <table class="table table-bordered">
                         <tr>
                             <td><button type="button" class="btn btn-primary">@Model.Player1.AbilityList[0].Name</button></td>
