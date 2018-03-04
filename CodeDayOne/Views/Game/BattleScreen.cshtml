@@ -1,8 +1,5 @@
 ﻿@model CodeDayOne.Models.Game
-
-<script type="text/javascript" src="js/script.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
 @{
     ViewData["Title"] = "BattleScreen";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -67,7 +64,7 @@
         <div id="minionBattleList" class="col-md-4">
             @foreach (var minion in Model.MinionList)
             {
-                <div class="row">
+                <div class="row battleMinion" style="border-style: groove; border-radius: 5px" >
                     <div class="col-md-6">
                         <img src="@minion.RedImageURL" />
                     </div>
@@ -82,8 +79,24 @@
                         </div>
                     </div>
                 </div>
-
             }
         </div>
     </div>
 </div>
+
+<script>
+    $(function () {
+        $(".battleMinion").click(function () {
+            if ($(this).hasClass('targeted')) {
+                $(this).removeClass('targeted');
+                $(this).css('background-color', '#ffffff');
+            }
+            else {
+                $(this).css('background-color', '#fff375');
+                $(this).addClass('targeted');
+
+            }
+            
+        });
+    });
+</script>
