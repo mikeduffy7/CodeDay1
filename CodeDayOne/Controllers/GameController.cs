@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Windows;
+using System.Drawing;
 using CodeDayOne.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -16,9 +16,7 @@ namespace CodeDayOne.Controllers
 
         public IActionResult GameBoard()
         {
-            // create window to work in
-            // Canvas canvas = new Canvas();
-
+            
             return View();
         }
 
