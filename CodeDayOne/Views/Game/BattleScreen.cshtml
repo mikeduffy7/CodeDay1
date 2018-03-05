@@ -1,12 +1,13 @@
 ﻿@model CodeDayOne.Models.Game
 <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="~/js/app.js"></script>
 @{
     ViewData["Title"] = "BattleScreen";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>BattleScreen</h2>
-<button class="btn btn-danger" type="button" href="@Url.Action("CreateMinionHorde", "GameController")" >Random Minion Horde</button>
+<button class="btn btn-danger" id="createHordeButton" onclick="createMinionHorde()" type="button" href="@Url.Action("CreateMinionHorde", "GameController")" >Random Minion Horde</button>
 
 <div>
     <div class="row">
@@ -22,7 +23,6 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @Html.DropDownListFor(x => x.Player1.AbilitySelectList, Model.Player1.AbilitySelectList)
                     <table class="table table-bordered">
                         <tr>
                             <td><button type="button" class="btn btn-primary">@Model.Player1.AbilityList[0].Name</button></td>
@@ -64,7 +64,7 @@
         <div id="minionBattleList" class="col-md-4">
             @foreach (var minion in Model.MinionList)
             {
-                <div class="row battleMinion" style="border-style: groove; border-radius: 5px" >
+                <div class="row battleMinion" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px" >
                     <div class="col-md-6">
                         <img src="@minion.RedImageURL" />
                     </div>
@@ -83,20 +83,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(function () {
-        $(".battleMinion").click(function () {
-            if ($(this).hasClass('targeted')) {
-                $(this).removeClass('targeted');
-                $(this).css('background-color', '#ffffff');
-            }
-            else {
-                $(this).css('background-color', '#fff375');
-                $(this).addClass('targeted');
-
-            }
-            
-        });
-    });
-</script>
+@Html.Hidden('_minionList', Model.BattleMinionList)

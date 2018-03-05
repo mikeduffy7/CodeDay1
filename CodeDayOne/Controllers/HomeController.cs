@@ -21,10 +21,5 @@ namespace CodeDayOne.Controllers
 
             return View();
         }
-
-        public void changeChampion(Champion champion)
-        {
-            
-        }
     }
 }

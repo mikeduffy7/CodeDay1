@@ -1,19 +1,43 @@
-﻿function changeChampion(listIndex){
-    if (document.getElementById('partyMember1').checked) {
-        document.getElementById('championData').value = listIndex;
-        console.log("championData's value is = " + document.getElementById('championData').value);
+﻿function highlightMinion(x) {
+    var minions = document.querySelectorAll(".battleMinion");
+    console.log = minions.length;
+    if ($(x).hasClass('targeted')) {
+        $(x).removeClass('targeted');
+        $(x).css('background-color', '#ffffff');
     }
-    else if (document.getElementById('partyMember2').checked){
-        console.log("Party Member #2 is now " + listIndex.name);
+    else {
+        for (var i = 0; i < minions.length; i++) {
+            minions[i].classList.remove('targeted');
+            minions[i].style.backgroundColor = "white";
+        }
+        $(x).css('background-color', '#fff375');
+        $(x).addClass('targeted');
     }
 }
 
-function selectRandomMinionIndex(minionListCount) {
-    var random = Math.floor((Math.rand() * minionListCount) + 1);
-    document.getElementById('minionBattleList').innerHTML = "@Model.MinionList[" + random + "].Name";
+function createMinionHorde() {
+    var redHorde = redMinionHorde();
+    var hordeSize = randomNumberOfMinions();
+    console.log("The horde is red: " + redHorde);
+    console.log("Number of minions in horde: " + hordeSize);
 }
 
-function targetMinion() {
-    console.log("Div selected!");
-    //x.style.background = "#fff375";
+//returns a bool to determine if the minions will be blue or red
+function redMinionHorde() {
+    var coinFlip = Math.floor(Math.random() * 2);
+    if (coinFlip === 0)
+        return true;
+    else
+        return false;
+}
+
+//determines number of minions created; between 2 and 5
+function randomNumberOfMinions() {
+    var numberOfMinions = Math.floor((Math.random() * 4) + 2);
+    return numberOfMinions;
+}
+
+function refreshMinionList(num) {
+    document.getElementById('battleMinionList').innerHTML = "";
+    
 }
