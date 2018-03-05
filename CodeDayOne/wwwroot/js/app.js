@@ -38,6 +38,5 @@ function randomNumberOfMinions() {
 }
 
 function refreshMinionList(num) {
-    document.getElementById('battleMinionList').innerHTML = "";
-    
+    //document.getElementById('_minionList').value = null;
 }

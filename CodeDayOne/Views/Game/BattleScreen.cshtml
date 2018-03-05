@@ -62,19 +62,19 @@
             </div>
         </div>
         <div id="minionBattleList" class="col-md-4">
-            @foreach (var minion in Model.MinionList)
+            @for (var i = 0; i < Model.MinionList.Count; i++)
             {
-                <div class="row battleMinion" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px" >
+                <div value="@i" class="row battleMinion" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px" >
                     <div class="col-md-6">
-                        <img src="@minion.RedImageURL" />
+                        <img src="@Model.MinionList[i].BlueImageURL" />
                     </div>
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-12">
-                                @minion.Name
+                                @Model.MinionList[i].Name
                             </div>
                             <div class="col-md-12">
-                                <img src="https://i.imgur.com/fXyXzCk.png" /> @minion.CurrentHealth/@minion.MaxHealth
+                                <img src="https://i.imgur.com/fXyXzCk.png" /> @Model.MinionList[i].CurrentHealth/@Model.MinionList[i].MaxHealth
                             </div>
                         </div>
                     </div>
@@ -83,4 +83,3 @@
         </div>
     </div>
 </div>
-@Html.Hidden('_minionList', Model.BattleMinionList)
