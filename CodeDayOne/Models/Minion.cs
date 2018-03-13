@@ -10,8 +10,8 @@ namespace CodeDayOne.Models
         public string RedImageURL { get; set; }
 
         public Minion(string name, int maxHealth, int attackSpeed, int attack,
-                      int defense, int armor, int magicResist, List<Ability> abilityList, int goldGiven, int xpGiven)
-            :base(name, maxHealth, attackSpeed, attack, defense, armor, magicResist, abilityList)
+                      int armor, int magicResist, int goldGiven, int xpGiven)
+            :base(name, maxHealth, attackSpeed, attack, armor, magicResist)
         {
             this.GoldGiven = goldGiven;
             this.XPGiven = xpGiven;

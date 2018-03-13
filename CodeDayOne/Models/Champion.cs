@@ -13,8 +13,8 @@ namespace CodeDayOne.Models
         public SelectList AbilitySelectList { get; set; }
 
         public Champion(string name, int maxHealth, int attackSpeed, int attack,
-                         int defense, int armor, int magicResist, List<Ability> abilityList, int maxMana) 
-            : base(name, maxHealth, attackSpeed, attack, defense, armor, magicResist, abilityList)
+                         int armor, int magicResist, int maxMana) 
+            : base(name, maxHealth, attackSpeed, attack, armor, magicResist)
         {
             this.MaxMana = maxMana;
             this.CurrentMana = maxMana;

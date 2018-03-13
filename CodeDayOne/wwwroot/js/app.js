@@ -33,7 +33,7 @@ function redMinionHorde() {
 
 //determines number of minions created; between 2 and 5
 function randomNumberOfMinions() {
-    var numberOfMinions = Math.floor((Math.random() * 4) + 2);
+    var numberOfMinions = Math.floor(Math.random() * 4 + 2);
     return numberOfMinions;
 }
 

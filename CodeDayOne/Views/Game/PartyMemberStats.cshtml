@@ -16,9 +16,6 @@
                 <td>Attack: @Model.Player1.Attack</td>
             </tr>
             <tr>
-                <td>Defense: @Model.Player1.Defense</td>
-            </tr>
-            <tr>
                 <td>Armor: @Model.Player1.Armor</td>
             </tr>
             <tr>
@@ -44,9 +41,6 @@
                 <td>Attack: @Model.Player2.Attack</td>
             </tr>
             <tr>
-                <td>Defense: @Model.Player2.Defense</td>
-            </tr>
-            <tr>
                 <td>Armor: @Model.Player2.Armor</td>
             </tr>
             <tr>
@@ -63,24 +57,48 @@
     <div class="col-md-6">
         <table class="table table-bordered">
             <tr>
+                <td><button type="button" class="btn">Basic Attack</button></td>
+                <td>0 Mana</td>
+            </tr>
+            <tr>
                 <td><button type="button" class="btn btn-primary">@Model.Player1.AbilityList[0].Name</button></td>
+                <td>@Model.Player1.AbilityList[0].ManaCost Mana</td>
+            </tr>
+            <tr>
                 <td><button type="button" class="btn btn-success">@Model.Player1.AbilityList[1].Name</button></td>
+                <td>@Model.Player1.AbilityList[1].ManaCost Mana</td>
             </tr>
             <tr>
                 <td><button type="button" class="btn btn-info">@Model.Player1.AbilityList[2].Name</button></td>
+                <td>@Model.Player1.AbilityList[2].ManaCost Mana</td>
+            </tr>
+            <tr>
                 <td><button type="button" class="btn btn-danger">@Model.Player1.AbilityList[3].Name</button></td>
+                <td>@Model.Player1.AbilityList[3].ManaCost Mana</td>
             </tr>
         </table>
     </div>
     <div class="col-md-6">
         <table class="table table-bordered">
             <tr>
-                <td><button type="button" class="btn btn-primary">@Model.Player2.AbilityList[0].Name</button></td>
-                <td><button type="button" class="btn btn-success">@Model.Player2.AbilityList[1].Name</button></td>
+                <td><button type="button" class="btn">Basic Attack</button></td>
+                <td>0 Mana</td>
             </tr>
             <tr>
-                <td><button type="button" class="btn btn-info">@Model.Player2.AbilityList[2].Name</button></td>
-                <td><button type="button" class="btn btn-danger">@Model.Player2.AbilityList[3].Name</button></td>
+                <td><button type="button" class="btn btn-primary">@Model.Player1.AbilityList[0].Name</button></td>
+                <td>@Model.Player2.AbilityList[0].ManaCost Mana</td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-success">@Model.Player1.AbilityList[1].Name</button></td>
+                <td>@Model.Player2.AbilityList[1].ManaCost Mana</td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-info">@Model.Player1.AbilityList[2].Name</button></td>
+                <td>@Model.Player2.AbilityList[2].ManaCost Mana</td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-danger">@Model.Player1.AbilityList[3].Name</button></td>
+                <td>@Model.Player2.AbilityList[3].ManaCost Mana</td>
             </tr>
         </table>
     </div>
