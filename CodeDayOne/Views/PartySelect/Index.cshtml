@@ -1,0 +1,25 @@
+﻿@model CodeDayOne.ViewModels.PartySelectViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Party Select View</h2>
+
+<div class="row">
+    @foreach (var champion in Model.Champions)
+    {
+        <button class="champButton" type="button" value="@champion.ID" onclick="location.href='@Url.Action("Index", "PartySelect", new { id = champion.ID, partyMember1Id = Model.PartyMember1.ID, partyMember2Id = Model.PartyMember2.ID })'">
+            <img src="@champion.ImageSource" />
+        </button>
+    }
+</div>
+
+@if (Model.PartyMember1.Name != null)
+{
+    <h1>Party Member 1: @Model.PartyMember1.Name</h1>
+}
+@if (Model.PartyMember2.Name != null)
+{
+    <h1>Party Member 2: @Model.PartyMember2.Name</h1>
+}

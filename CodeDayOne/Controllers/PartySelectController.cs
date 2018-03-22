@@ -1,66 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using CodeDayOne.Models;
+using CodeDayOne.ViewModels;
 
-namespace CodeDayOne.Models
+namespace CodeDayOne.Controllers
 {
-    public class Game
+    public class PartySelectController : Controller
     {
-        public List<Champion> ChampionList { get; set; }
-        public List<Minion> MinionList { get; set; }
-        public List<Minion> BattleMinionList { get; set; }
-        public SelectList MinionSelectList { get; set; }
-        public Champion Player1 { get; set; }
-        public Champion Player2 { get; set; }
-        public int Player1Index { get; set; }
-        public int Player2Index { get; set; }
-        public Minion MeleeMinion { get; set; }
-        public Minion CasterMinion { get; set; }
-        public Minion SiegeMinion { get; set; }
-        public Minion SuperMinion { get; set; }
-
-        public Game()
+        public IActionResult Index(int? id, int? partyMember1Id, int? partyMember2Id)
         {
-            ChampionList = new List<Champion>();
-            MinionList = new List<Minion>();
-            BattleMinionList = new List<Minion>();
-        }
+            var viewModel = new PartySelectViewModel
+            {
+                Champions = LoadChampions(),
+                PartyMember1 = new Champion(null, 0, 0, 0, 0, 0, 0, 0),
+                PartyMember2 = new Champion(null, 0, 0, 0, 0, 0, 0, 0)
+            };
 
-        public List<Minion> LoadMinions()
-        {
-            var meleeMinion = new Minion("Melee Minion", 455, 2, 12, 0, 0, 20, 59);
-            meleeMinion.BlueImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/6/65/Blue_Melee_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204557";
-            meleeMinion.RedImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/e/ea/Red_Melee_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204552";
+            if (partyMember1Id == 0)
+                viewModel.PartyMember1 = viewModel.Champions.SingleOrDefault(c => c.ID == id);
+            else if (partyMember2Id == 0)
+            {
+                viewModel.PartyMember1 = viewModel.Champions.SingleOrDefault(c => c.ID == partyMember1Id);
+                viewModel.PartyMember2 = viewModel.Champions.SingleOrDefault(c => c.ID == id);
+            }
+                
 
-            var casterMinion = new Minion("Caster Minion", 308, 1, 22, 0, 0, 17, 29);
-            casterMinion.BlueImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/f/fa/Blue_Caster_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204553";
-            casterMinion.RedImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/1/10/Red_Caster_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204552";
 
-            var siegeMinion = new Minion("Siege Minion", 805, 1, 40, 0, 0, 45, 92);
-            siegeMinion.BlueImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/6/6c/Blue_Siege_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204558";
-            siegeMinion.RedImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/c/c1/Red_Siege_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204553";
-
-            var superMinion = new Minion("Super Minion", 2000, 1, 190, 30, -30, 40, 97);
-            superMinion.BlueImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/4/4a/Blue_Super_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204557";
-            superMinion.RedImageURL = "https://vignette.wikia.nocookie.net/leagueoflegends/images/0/04/Red_Super_MinionSquare.png/revision/latest/scale-to-width-down/48?cb=20140731204553";
-
-            MeleeMinion = meleeMinion;
-            CasterMinion = casterMinion;
-            SiegeMinion = siegeMinion;
-            SuperMinion = superMinion;
-
-            MinionList.Add(meleeMinion);
-            MinionList.Add(casterMinion);
-            MinionList.Add(siegeMinion);
-            MinionList.Add(superMinion);
-
-            return MinionList;
+            return View(viewModel);
         }
 
         public List<Champion> LoadChampions()
         {
+            var ChampionList = new List<Champion>();
+
             var Ahri = new Champion("Ahri", 526, 66, 53, 20, 30, 200, 1);
             Ahri.AbilityList.Add(new Ability("Orb of Deception", 65, Ability.Damage_Type.magic, 10));
             Ahri.AbilityList.Add(new Ability("Fox Fire", 50, Ability.Damage_Type.magic, 10));
@@ -99,7 +74,7 @@ namespace CodeDayOne.Models
 
             var Malphite = new Champion("Malphite", 574, 63, 61, 37, 32, 90, 7);
             Malphite.AbilityList.Add(new Ability("Seismic Shard", 70, Ability.Damage_Type.magic, 8));
-            Malphite.AbilityList.Add(new Ability("Brutal Strikes", 25, Ability.Damage_Type.physical, 12)); 
+            Malphite.AbilityList.Add(new Ability("Brutal Strikes", 25, Ability.Damage_Type.physical, 12));
             Malphite.AbilityList.Add(new Ability("Ground Slam", 50, Ability.Damage_Type.magic, 14)); //reduce opponent attackSpeed by 15% for 1 round
             Malphite.AbilityList.Add(new Ability("Unstoppable Force", 100, Ability.Damage_Type.magic, 60));
 
@@ -108,7 +83,7 @@ namespace CodeDayOne.Models
             Sona.AbilityList.Add(new Ability("Aria of Perseverence", 5, Ability.Damage_Type.magic, 10));
             Sona.AbilityList.Add(new Ability("Song of Celerity", 8, Ability.Damage_Type.magic, 10));
             Sona.AbilityList.Add(new Ability("Crescendo", 15, Ability.Damage_Type.magic, 60));
-            
+
             ChampionList.Add(Ahri);
             ChampionList.Add(Caitlyn);
             ChampionList.Add(Darius);
@@ -118,25 +93,7 @@ namespace CodeDayOne.Models
             ChampionList.Add(Malphite);
             ChampionList.Add(Sona);
 
-            Player1 = ChampionList.ElementAt(0);
-            Player2 = ChampionList.ElementAt(1);
-
             return ChampionList;
-        }
-
-        public void CreateAbilitySelectList()
-        {
-            foreach (Champion champ in ChampionList)
-            {
-                champ.AbilitySelectList = new SelectList(new[]
-                {
-                    new { ID = "1", Name = champ.AbilityList.ElementAt(0).Name },
-                    new { ID = "2", Name = champ.AbilityList.ElementAt(1).Name },
-                    new { ID = "3", Name = champ.AbilityList.ElementAt(2).Name },
-                    new { ID = "4", Name = champ.AbilityList.ElementAt(3).Name },
-                },
-                "ID", "Name", 1);
-            }
         }
     }
 }
