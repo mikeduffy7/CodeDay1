@@ -4,7 +4,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Party Select View</h2>
+<h1 class="text-center">Party Select View</h1>
+
+<hr />
+
+
+@if (Model.PartyMember1.ID == 0)
+{
+    <h2 class="text-left">Party Member #1 Select</h2>
+}
+else if (Model.PartyMember2.ID == 0)
+{
+    <h2 class="text-right">Party Member #2 Select</h2>
+}
+else
+{
+    <h2 class="text-center">Confirm Party</h2>
+    <div class="row">
+        <div class="col-md-6 text-right">
+            <button onclick="location.href='@Url.Action("Battlescreen", "Game", new { player1Index = Model.PartyMember1.ID - 1, player2Index = Model.PartyMember2.ID - 1 })'" type="button" class="btn btn-success">To The Fields of Justice</button> 
+        </div>
+        <div class="col-md-6 text-left">
+            <button onclick="location.href='@Url.Action("Index", "PartySelect")'" type="button" class="btn btn-danger">Reselect Party Members</button>
+        </div>
+    </div>
+}
+
+<hr />
 
 <div class="row">
     @foreach (var champion in Model.Champions)
@@ -15,11 +41,17 @@
     }
 </div>
 
-@if (Model.PartyMember1.Name != null)
-{
-    <h1>Party Member 1: @Model.PartyMember1.Name</h1>
-}
-@if (Model.PartyMember2.Name != null)
-{
-    <h1>Party Member 2: @Model.PartyMember2.Name</h1>
-}
+<div class="row">
+    <div class="col-md-6 text-center">
+        @if (Model.PartyMember1.Name != null)
+        {
+            <h1>Party Member 1: @Model.PartyMember1.Name</h1>
+        }
+    </div>
+    <div class="col-md-6 text-center">
+        @if (Model.PartyMember2.Name != null)
+        {
+            <h1>Party Member 2: @Model.PartyMember2.Name</h1>
+        }
+    </div>
+</div>
