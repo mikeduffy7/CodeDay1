@@ -1,0 +1,20 @@
+﻿@model CodeDayOne.ViewModels.PartySelectViewModel
+
+<div class="row">
+    @foreach (var champion in Model.Champions)
+    {
+        if (champion.ID == Model.PartyMember1.ID)
+        {
+            <button disabled class="champButton" type="button" value="@champion.ID" onclick="location.href='@Url.Action("Index", "PartySelect", new { id = champion.ID, partyMember1Id = Model.PartyMember1.ID, partyMember2Id = Model.PartyMember2.ID })'">
+                <img src="@champion.ImageSource" />
+            </button>
+        }
+        else
+        {
+            <button class="champButton" type="button" value="@champion.ID" onclick="location.href='@Url.Action("Index", "PartySelect", new { id = champion.ID, partyMember1Id = Model.PartyMember1.ID, partyMember2Id = Model.PartyMember2.ID })'">
+                <img src="@champion.ImageSource" />
+            </button>
+        }
+
+    }
+</div>

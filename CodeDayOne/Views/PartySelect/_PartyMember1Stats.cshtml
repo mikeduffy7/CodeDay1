@@ -1,0 +1,60 @@
+﻿@model CodeDayOne.ViewModels.PartySelectViewModel
+
+<div class="row">
+    <div class="col-md-3">
+        <table class="table table-bordered">
+            <tr>
+                <td>Health: @Model.PartyMember1.MaxHealth</td>
+            </tr>
+            <tr>
+                <td>Mana: @Model.PartyMember1.MaxMana</td>
+            </tr>
+            <tr>
+                <td>Attack Speed: @Model.PartyMember1.AttackSpeed</td>
+            </tr>
+            <tr>
+                <td>Attack: @Model.PartyMember1.Attack</td>
+            </tr>
+            <tr>
+                <td>Armor: @Model.PartyMember1.Armor</td>
+            </tr>
+            <tr>
+                <td>Magic Resist: @Model.PartyMember1.MagicResist</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-3">
+        <h1>@Model.PartyMember1.Name</h1>
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table table-bordered">
+            <tr>
+                <td><button type="button" class="btn">Basic Attack</button></td>
+                <td>0 Mana</td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-primary">@Model.PartyMember1.AbilityList[0].Name</button></td>
+                <td>@Model.PartyMember1.AbilityList[0].ManaCost Mana</td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-success">@Model.PartyMember1.AbilityList[1].Name</button></td>
+                <td>@Model.PartyMember1.AbilityList[1].ManaCost Mana</td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-info">@Model.PartyMember1.AbilityList[2].Name</button></td>
+                <td>@Model.PartyMember1.AbilityList[2].ManaCost Mana</td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-danger">@Model.PartyMember1.AbilityList[3].Name</button></td>
+                <td>@Model.PartyMember1.AbilityList[3].ManaCost Mana</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>
