@@ -22,7 +22,7 @@ else
     <h2 class="text-center">Confirm Party</h2>
     <div class="row">
         <div class="col-md-6 text-right">
-            <button onclick="location.href='@Url.Action("Battlescreen", "Game", new { player1Index = Model.PartyMember1.ID - 1, player2Index = Model.PartyMember2.ID - 1 })'" type="button" class="btn btn-success">To The Fields of Justice</button> 
+            <button onclick="location.href='@Url.Action("Index", "Battle", new { partyMember1Id = Model.PartyMember1.ID, partyMember2Id = Model.PartyMember2.ID })'" type="button" class="btn btn-success">To The Fields of Justice</button> 
         </div>
         <div class="col-md-6 text-left">
             <button onclick="location.href='@Url.Action("Index", "PartySelect")'" type="button" class="btn btn-danger">Reselect Party Members</button>
