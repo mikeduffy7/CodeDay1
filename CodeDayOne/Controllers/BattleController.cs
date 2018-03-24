@@ -17,7 +17,6 @@ namespace CodeDayOne.Controllers
             {
                 BattleMinionList = LoadMinions(),
                 PartyMember1 = champions.SingleOrDefault(c => c.ID == partyMember1Id),
-
                 PartyMember2 = champions.SingleOrDefault(c => c.ID == partyMember2Id)
             };
             return View(viewModel);
