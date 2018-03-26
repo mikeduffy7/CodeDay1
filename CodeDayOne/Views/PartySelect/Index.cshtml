@@ -20,12 +20,27 @@ else if (Model.PartyMember2.ID == 0)
 else
 {
     <h2 class="text-center">Confirm Party</h2>
+}
+
+@if (Model.PartyMember1.ID > 0 && Model.PartyMember2.ID > 0)
+{
     <div class="row">
         <div class="col-md-6 text-right">
-            <button onclick="location.href='@Url.Action("Index", "Battle", new { partyMember1Id = Model.PartyMember1.ID, partyMember2Id = Model.PartyMember2.ID })'" type="button" class="btn btn-success">To The Fields of Justice</button> 
+            <button onclick="location.href='@Url.Action("Index", "Battle", new { partyMember1Id = Model.PartyMember1.ID, partyMember2Id = Model.PartyMember2.ID })'" type="button" class="btn btn-success">To The Fields of Justice</button>
         </div>
         <div class="col-md-6 text-left">
             <button onclick="location.href='@Url.Action("Index", "PartySelect")'" type="button" class="btn btn-danger">Reselect Party Members</button>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-6 text-right">
+            <button disabled type="button" class="btn btn-success">To The Fields of Justice</button>
+        </div>
+        <div class="col-md-6 text-left">
+            <button disabled type="button" class="btn btn-danger">Reselect Party Members</button>
         </div>
     </div>
 }
