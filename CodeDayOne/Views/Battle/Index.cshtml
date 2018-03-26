@@ -1,6 +1,6 @@
 ﻿@model CodeDayOne.ViewModels.BattleViewModel
-<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
-<script type="text/javascript" src="~/js/app.js"></script>
+<script src="~/lib/jquery/dist/jquery.js" type="text/javascript"></script>
+<script src="~/js/app.js" type="text/javascript" ></script>
 @{
     ViewData["Title"] = "BattleScreen";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,6 +19,7 @@
 <div>
     <div class="row text-left">
         <div class="col-md-4">
+            <!-- Party Member 1 Start -->
             <div class="row">
                 <div class="col-md-6">
                     <img class="champPicture" src="@Model.PartyMember1.ImageSource" />
@@ -32,30 +33,22 @@
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <tr>
-                            <td><button type="button" class="btn">Basic Attack</button></td>
+                            <td><button onclick="attack()" type="button" class="btn champAttack" value="basicAttack">Basic Attack</button></td>
                             <td>0 Mana</td>
                         </tr>
-                        <tr>
-                            <td><button type="button" class="btn btn-primary">@Model.PartyMember1.AbilityList[0].Name</button></td>
-                            <td>@Model.PartyMember1.AbilityList[0].ManaCost Mana</td>
-                        </tr>
-                        <tr>
-                            <td><button type="button" class="btn btn-success">@Model.PartyMember1.AbilityList[1].Name</button></td>
-                            <td>@Model.PartyMember1.AbilityList[1].ManaCost Mana</td>
-                        </tr>
-                        <tr>
-                            <td><button type="button" class="btn btn-info">@Model.PartyMember1.AbilityList[2].Name</button></td>
-                            <td>@Model.PartyMember1.AbilityList[2].ManaCost Mana</td>
-                        </tr>
-                        <tr>
-                            <td><button type="button" class="btn btn-danger">@Model.PartyMember1.AbilityList[3].Name</button></td>
-                            <td>@Model.PartyMember1.AbilityList[3].ManaCost Mana</td>
-                        </tr>
+                        @foreach (var ability in Model.PartyMember1.AbilityList)
+                        {
+                            <tr>
+                                <td><button type="button" class="btn btn-primary champAttack" value="@ability.Name">@ability.Name</button></td>
+                                <td>@ability.ManaCost Mana</td>
+                            </tr>
+                        }
                     </table>
                 </div>
             </div>
-        </div>
+        </div> <!-- Party Member 1 End -->
         <div class="col-md-4">
+            <!-- Party Member 2 Start -->
             <div class="row">
                 <div class="col-md-6">
                     <img class="champPicture" src="@Model.PartyMember2.ImageSource" />
@@ -69,55 +62,49 @@
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <tr>
-                            <td><button type="button" class="btn">Basic Attack</button></td>
+                            <td><button type="button" class="btn champAttack" value="basicAttack">Basic Attack</button></td>
                             <td>0 Mana</td>
                         </tr>
-                        <tr>
-                            <td><button type="button" class="btn btn-primary abilityButton">@Model.PartyMember2.AbilityList[0].Name</button></td>
-                            <td>@Model.PartyMember2.AbilityList[0].ManaCost Mana</td>
-                        </tr>
-                        <tr>
-                            <td><button type="button" class="btn btn-success abilityButton">@Model.PartyMember2.AbilityList[1].Name</button></td>
-                            <td>@Model.PartyMember2.AbilityList[1].ManaCost Mana</td>
-                        </tr>
-                        <tr>
-                            <td><button type="button" class="btn btn-info abilityButton">@Model.PartyMember2.AbilityList[2].Name</button></td>
-                            <td>@Model.PartyMember2.AbilityList[2].ManaCost Mana</td>
-                        </tr>
-                        <tr>
-                            <td><button type="button" class="btn btn-danger abilityButton">@Model.PartyMember2.AbilityList[3].Name</button></td>
-                            <td>@Model.PartyMember2.AbilityList[3].ManaCost Mana</td>
-                        </tr>
+                        @foreach (var ability in Model.PartyMember2.AbilityList)
+                        {
+                            <tr>
+                                <td><button type="button" class="btn btn-danger champAttack" value="@ability.Name">@ability.Name</button></td>
+                                <td>@ability.ManaCost Mana</td>
+                            </tr>
+                        }
                     </table>
                 </div>
             </div>
-        </div>
+        </div> <!-- Party Member 2 End -->
         <div id="minionBattleList" class="col-md-4">
+            <!-- Battle Minion List Start -->
             @for (var i = 0; i < Model.BattleMinionList.Count; i++)
             {
-                <div value="@i" class="row battleMinion" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px" >
-                    <div class="col-md-6">
-                        @if (Model.IsRed)
-                        {
-                            <img src="@Model.BattleMinionList[i].RedImageURL" />
-                        }
-                        else
-                        {
-                            <img src="@Model.BattleMinionList[i].BlueImageURL" />
-                        }
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-12">
-                                @Model.BattleMinionList[i].Name
-                            </div>
-                            <div class="col-md-12">
-                                <img src="https://i.imgur.com/fXyXzCk.png" /> @Model.BattleMinionList[i].CurrentHealth/@Model.BattleMinionList[i].MaxHealth
-                            </div>
+            <div value="@i" class="row battleMinion" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px">
+                <div class="col-md-6">
+                    @if (Model.IsRed)
+                    {
+                        <img src="@Model.BattleMinionList[i].RedImageURL" />
+                    }
+                    else
+                    {
+                        <img src="@Model.BattleMinionList[i].BlueImageURL" />
+                    }
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Model.BattleMinionList[i].Name
+                        </div>
+                        <div class="col-md-12">
+                            <img src="https://i.imgur.com/fXyXzCk.png" /> @Model.BattleMinionList[i].CurrentHealth/@Model.BattleMinionList[i].MaxHealth
                         </div>
                     </div>
                 </div>
+            </div>
             }
-        </div>
+        </div><!-- Battle Minion List End -->
     </div>
 </div>
+
+<p id="battleDialogue">Battle Dialogue:</p>

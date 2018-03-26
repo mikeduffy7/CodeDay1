@@ -135,7 +135,7 @@ namespace CodeDayOne.Controllers
         public int NumberOfMinionsInHorde()
         {
             var random = new Random();
-            int numberOfMinions = random.Next(2, 6);
+            int numberOfMinions = random.Next(3, 7);
             return numberOfMinions;
         }
 
