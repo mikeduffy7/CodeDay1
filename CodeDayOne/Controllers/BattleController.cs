@@ -15,9 +15,10 @@ namespace CodeDayOne.Controllers
             var champions = LoadChampions();
             var viewModel = new BattleViewModel
             {
-                BattleMinionList = LoadMinions(),
+                BattleMinionList = CreateHorde(NumberOfMinionsInHorde()),
                 PartyMember1 = champions.SingleOrDefault(c => c.ID == partyMember1Id),
-                PartyMember2 = champions.SingleOrDefault(c => c.ID == partyMember2Id)
+                PartyMember2 = champions.SingleOrDefault(c => c.ID == partyMember2Id),
+                IsRed = MinionsAreRed()
             };
             return View(viewModel);
         }
@@ -120,6 +121,43 @@ namespace CodeDayOne.Controllers
             ChampionList.Add(Sona);
 
             return ChampionList;
+        }
+
+        public bool MinionsAreRed()
+        {
+            var random = new Random();
+            var randomNumber = random.Next(0, 2);
+            if (randomNumber == 0)
+                return true;
+            else return false;
+        }
+
+        public int NumberOfMinionsInHorde()
+        {
+            var random = new Random();
+            int numberOfMinions = random.Next(2, 6);
+            return numberOfMinions;
+        }
+
+        public List<Minion> CreateHorde(int numberOfMinions)
+        {
+            var minionList = new List<Minion>();
+
+            for (var i = 0; i < numberOfMinions; i++)
+            {
+                minionList.Add(RandomMinion());
+            }
+
+            return minionList;
+        }
+
+        public Minion RandomMinion()
+        {
+            var minions = LoadMinions();
+            var random = new Random();
+            var index = random.Next(0, minions.Count);
+            Minion randomMinion = minions[index];
+            return randomMinion;
         }
     }
 }

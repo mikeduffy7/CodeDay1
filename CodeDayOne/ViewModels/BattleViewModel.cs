@@ -11,6 +11,7 @@ namespace CodeDayOne.ViewModels
         public Champion PartyMember1 { get; set; }
         public Champion PartyMember2 { get; set; }
         public List<Minion> BattleMinionList { get; set; }
+        public bool IsRed { get; set; }
 
         public BattleViewModel()
         {

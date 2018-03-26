@@ -97,7 +97,14 @@
             {
                 <div value="@i" class="row battleMinion" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px" >
                     <div class="col-md-6">
-                        <img src="@Model.BattleMinionList[i].BlueImageURL" />
+                        @if (Model.IsRed)
+                        {
+                            <img src="@Model.BattleMinionList[i].RedImageURL" />
+                        }
+                        else
+                        {
+                            <img src="@Model.BattleMinionList[i].BlueImageURL" />
+                        }
                     </div>
                     <div class="col-md-6">
                         <div class="row">
