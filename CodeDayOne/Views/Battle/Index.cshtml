@@ -1,6 +1,6 @@
 ﻿@model CodeDayOne.ViewModels.BattleViewModel
 <script src="~/lib/jquery/dist/jquery.js" type="text/javascript"></script>
-<script src="~/js/app.js" type="text/javascript" ></script>
+<script src="~/js/app.js" type="text/javascript"></script>
 @{
     ViewData["Title"] = "BattleScreen";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,7 +11,9 @@
 <hr />
 
 <div class="text-center">
-    <button class="btn btn-danger" id="createHordeButton" onclick="createMinionHorde()" type="button" href="@Url.Action("CreateMinionHorde", "GameController")">Create Random Minion Horde</button
+    <button class="btn btn-danger" id="createHordeButton" onclick="createMinionHorde()" type="button" href="@Url.Action("CreateMinionHorde", "GameController")">
+        Create Random Minion Horde
+    </button>
 </div>
 
 <hr />
@@ -80,28 +82,28 @@
             <!-- Battle Minion List Start -->
             @for (var i = 0; i < Model.BattleMinionList.Count; i++)
             {
-            <div value="@i" class="row battleMinion" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px">
-                <div class="col-md-6">
-                    @if (Model.IsRed)
-                    {
-                        <img src="@Model.BattleMinionList[i].RedImageURL" />
-                    }
-                    else
-                    {
-                        <img src="@Model.BattleMinionList[i].BlueImageURL" />
-                    }
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12">
-                            @Model.BattleMinionList[i].Name
-                        </div>
-                        <div class="col-md-12">
-                            <img src="https://i.imgur.com/fXyXzCk.png" /> @Model.BattleMinionList[i].CurrentHealth/@Model.BattleMinionList[i].MaxHealth
+                <div value="@i" class="row battleMinion" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px">
+                    <div class="col-md-6">
+                        @if (Model.IsRed)
+                        {
+                            <img src="@Model.BattleMinionList[i].RedImageURL" />
+                        }
+                        else
+                        {
+                            <img src="@Model.BattleMinionList[i].BlueImageURL" />
+                        }
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Model.BattleMinionList[i].Name
+                            </div>
+                            <div class="col-md-12">
+                                <img src="https://i.imgur.com/fXyXzCk.png" /> @Model.BattleMinionList[i].CurrentHealth/@Model.BattleMinionList[i].MaxHealth
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             }
         </div><!-- Battle Minion List End -->
     </div>
