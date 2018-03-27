@@ -110,3 +110,18 @@
 </div>
 
 <p id="battleDialogue">Battle Dialogue:</p>
+
+<script>
+    $(".champAttack").click(function () {
+        var targetedMinion = document.querySelector(".targeted");
+        var div = document.getElementById("battleDialogue");
+        if (targetedMinion != null) {
+            var val = targetedMinion.value;
+            div.innerHTML = "Champion has attacked a minion! <br>" + div.innerHTML;
+            //div.innerHTML = val;
+        }
+        else {
+            div.innerHTML = "Need to target minion first! <br>" + div.innerHTML;
+        }
+    });
+</script>

@@ -18,5 +18,4 @@ function highlightMinion(x) {
         $(x).css("background-color", "#fff375");
         $(x).addClass("targeted");
     }
-    $("#battleDialogue").text("Targeted a minion!");
 }
