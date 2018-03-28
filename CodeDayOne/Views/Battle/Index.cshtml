@@ -35,16 +35,16 @@
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <tr>
-                            <td><button onclick="attack()" type="button" class="btn champAttack" value="basicAttack">Basic Attack</button></td>
+                            <td><button type="button" class="btn champAttack" value="basicAttack">Basic Attack</button></td>
                             <td>0 Mana</td>
                         </tr>
                         @foreach (var ability in Model.PartyMember1.AbilityList)
-                        {
-                            <tr>
-                                <td><button type="button" class="btn btn-primary champAttack" value="@ability.Name">@ability.Name</button></td>
-                                <td>@ability.ManaCost Mana</td>
-                            </tr>
-                        }
+                    {
+                        <tr>
+                            <td><button type="button" class="btn btn-primary champAttack" value="@ability.Name">@ability.Name</button></td>
+                            <td>@ability.ManaCost Mana</td>
+                        </tr>
+                }
                     </table>
                 </div>
             </div>
@@ -68,60 +68,60 @@
                             <td>0 Mana</td>
                         </tr>
                         @foreach (var ability in Model.PartyMember2.AbilityList)
-                        {
-                            <tr>
-                                <td><button type="button" class="btn btn-danger champAttack" value="@ability.Name">@ability.Name</button></td>
-                                <td>@ability.ManaCost Mana</td>
-                            </tr>
-                        }
+                    {
+                        <tr>
+                            <td><button type="button" class="btn btn-danger champAttack" value="@ability.Name">@ability.Name</button></td>
+                            <td>@ability.ManaCost Mana</td>
+                        </tr>
+                }
                     </table>
                 </div>
             </div>
         </div> <!-- Party Member 2 End -->
-        <div id="minionBattleList" class="col-md-4">
-            <!-- Battle Minion List Start -->
-            @for (var i = 0; i < Model.BattleMinionList.Count; i++)
-            {
-                <div value="@i" class="row battleMinion" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px">
-                    <div class="col-md-6">
-                        @if (Model.IsRed)
-                        {
-                            <img src="@Model.BattleMinionList[i].RedImageURL" />
-                        }
-                        else
-                        {
-                            <img src="@Model.BattleMinionList[i].BlueImageURL" />
-                        }
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-12">
-                                @Model.BattleMinionList[i].Name
-                            </div>
-                            <div class="col-md-12">
-                                <img src="https://i.imgur.com/fXyXzCk.png" /> @Model.BattleMinionList[i].CurrentHealth/@Model.BattleMinionList[i].MaxHealth
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div><!-- Battle Minion List End -->
+        <div id="minionPartial">
+            @{Html.RenderPartial("_MinionList", Model);}
+        </div>
     </div>
 </div>
 
 <p id="battleDialogue">Battle Dialogue:</p>
 
 <script>
+    //$(function () {
+    //    $('.champAttack').on("click", function () {
+    //        $.post('@Url.Action("Hit", "Battle")').always(function () {
+    //            $('.target').load('/Battle/Hit');
+    //        })
+    //    });
+    //});
+
+    function DeleteCategory(Minion) {
+
+
+    }
+
     $(".champAttack").click(function () {
-        var targetedMinion = document.querySelector(".targeted");
+        $.ajax({
+            url: "Battle/Hit",
+            type: "get",
+            //data: $("form").serialize(), //if you need to post Model data, use this
+            success: function (result) {
+                $("#minionPartial").html(result);
+            }
+        });
+    });
+
+    $(".champAttack").click(function () {
+        var targetedMinion = $('.targeted div div div p').html()
+        
         var div = document.getElementById("battleDialogue");
         if (targetedMinion != null) {
             var val = targetedMinion.value;
-            div.innerHTML = "Champion has attacked a minion! <br>" + div.innerHTML;
-            //div.innerHTML = val;
+            div.innerHTML = "Champion has attacked a " + targetedMinion + "! <br>" + div.innerHTML;
         }
         else {
             div.innerHTML = "Need to target minion first! <br>" + div.innerHTML;
         }
     });
+    
 </script>

@@ -23,12 +23,12 @@ namespace CodeDayOne.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
-        public ActionResult Hit(Game game)
+        
+        public ActionResult Hit(BattleViewModel model)
         {
 
 
-            return RedirectToAction("BattleScreen", "Game");
+            return View(model);
         }
 
         public List<Minion> LoadMinions()
