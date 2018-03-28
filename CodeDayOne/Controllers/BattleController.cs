@@ -24,11 +24,12 @@ namespace CodeDayOne.Controllers
         }
 
         
-        public ActionResult Hit(BattleViewModel model)
+        public ActionResult Hit(BattleViewModel oldModel, string abilityName, int minionIndex)
         {
+            var model = oldModel;
+            model.BattleMinionList.ElementAt(minionIndex).CurrentHealth -= 20;
 
-
-            return View(model);
+            return PartialView(model);
         }
 
         public List<Minion> LoadMinions()

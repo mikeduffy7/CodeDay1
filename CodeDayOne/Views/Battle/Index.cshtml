@@ -39,12 +39,12 @@
                             <td>0 Mana</td>
                         </tr>
                         @foreach (var ability in Model.PartyMember1.AbilityList)
-                    {
+                        {
                         <tr>
                             <td><button type="button" class="btn btn-primary champAttack" value="@ability.Name">@ability.Name</button></td>
                             <td>@ability.ManaCost Mana</td>
                         </tr>
-                }
+                        }
                     </table>
                 </div>
             </div>
@@ -84,39 +84,43 @@
     </div>
 </div>
 
+<input id="minionIndex" type="hidden" />
+
 <p id="battleDialogue">Battle Dialogue:</p>
 
 <script>
-    //$(function () {
-    //    $('.champAttack').on("click", function () {
-    //        $.post('@Url.Action("Hit", "Battle")').always(function () {
-    //            $('.target').load('/Battle/Hit');
-    //        })
-    //    });
-    //});
+    /*$(".champAttack").click(function (e) {
+        var ability_Name = this.getAttribute("value");
+        var div = document.getElementById("targeted");
+        var minion_Index = div.value;
 
-    function DeleteCategory(Minion) {
+        var div = document.getElementById("battleDialogue");
+        div.innerHTML = "Champion has used " + ability_Name + "! <br>" + div.innerHTML;
+        if (div.length > 0) {
+            minion_Index = div[0].value;
+            div.innerHTML = "Champion has attacked Minion #" + minion_Index + "! <br>" + div.innerHTML;
+        }
 
-
-    }
-
-    $(".champAttack").click(function () {
         $.ajax({
             url: "Battle/Hit",
-            type: "get",
-            //data: $("form").serialize(), //if you need to post Model data, use this
-            success: function (result) {
-                $("#minionPartial").html(result);
+            type: "get",*/
+            //data: { oldModel: @Model, abilityName: ability_Name, minionIndex: minion_Index},
+            /*success: function (data) {
+                $("#minionPartial").html(data);
+            },
+            error: function () {
+                alert("Something went wrong in controller.");
             }
         });
-    });
+    });*/
 
     $(".champAttack").click(function () {
         var targetedMinion = $('.targeted div div div p').html()
         
         var div = document.getElementById("battleDialogue");
         if (targetedMinion != null) {
-            var val = targetedMinion.value;
+            //var val = targetedMinion.value;
+            //var minionIndex = $('.row.battleMinion.targeted').value;
             div.innerHTML = "Champion has attacked a " + targetedMinion + "! <br>" + div.innerHTML;
         }
         else {
