@@ -1,9 +1,4 @@
-﻿function attack() {
-    var div = document.getElementById("battleDialogue");
-    div.innerHTML += "Champion used basic attack against minion.";
-}
-
-function highlightMinion(x) {
+﻿function highlightMinion(x) {
     var minions = document.querySelectorAll(".battleMinion");
     console.log = minions.length;
     if ($(x).hasClass("targeted")) {

@@ -35,13 +35,13 @@
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <tr>
-                            <td><button type="button" class="btn champAttack" champName="@Model.PartyMember1.Name" value="basic attack">Basic Attack</button></td>
+                            <td><button manaCost="0" type="button" class="btn champAttack" champName="@Model.PartyMember1.Name" value="basic attack">Basic Attack</button></td>
                             <td>0 Mana</td>
                         </tr>
                         @foreach (var ability in Model.PartyMember1.AbilityList)
                         {
                         <tr>
-                            <td><button type="button" class="btn btn-primary champAttack" champName="@Model.PartyMember1.Name" value="@ability.Name">@ability.Name</button></td>
+                            <td><button manaCost="@ability.ManaCost" type="button" class="btn btn-primary champAttack" champName="@Model.PartyMember1.Name" value="@ability.Name">@ability.Name</button></td>
                             <td>@ability.ManaCost Mana</td>
                         </tr>
                         }
@@ -57,20 +57,20 @@
                 </div>
                 <div class="col-md-6">
                     <h3><img src="https://i.imgur.com/fXyXzCk.png" /> <font color="red">@Model.PartyMember2.CurrentHealth/@Model.PartyMember2.MaxHealth</font></h3>
-                    <h3><img src="https://i.imgur.com/kAPA7h3.png" /> <font color="blue">@Model.PartyMember2.CurrentMana/@Model.PartyMember2.MaxMana</font></h3>
+                    <h3><img src="https://i.imgur.com/kAPA7h3.png" /> <font color="blue"><span id="partyMember2CurrentMana">@Model.PartyMember2.CurrentMana</span>/@Model.PartyMember2.MaxMana</font></h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <tr>
-                            <td><button type="button" class="btn champAttack" champName="@Model.PartyMember2.Name" value="basic attack">Basic Attack</button></td>
+                            <td><button manaCost="0" type="button" class="btn champAttack" champName="@Model.PartyMember2.Name" value="basic attack">Basic Attack</button></td>
                             <td>0 Mana</td>
                         </tr>
                         @foreach (var ability in Model.PartyMember2.AbilityList)
                     {
                         <tr>
-                            <td><button type="button" class="btn btn-danger champAttack" champName="@Model.PartyMember2.Name" value="@ability.Name">@ability.Name</button></td>
+                            <td><button manaCost="@ability.ManaCost" type="button" class="btn btn-danger champAttack" champName="@Model.PartyMember2.Name" value="@ability.Name">@ability.Name</button></td>
                             <td>@ability.ManaCost Mana</td>
                         </tr>
                 }
@@ -89,43 +89,48 @@
 <p id="battleDialogue">Battle Dialogue:</p>
 
 <script>
-    /*$(".champAttack").click(function (e) {
-        var ability_Name = this.getAttribute("value");
-        var div = document.getElementById("targeted");
-        var minion_Index = div.value;
-
-        var div = document.getElementById("battleDialogue");
-        div.innerHTML = "Champion has used " + ability_Name + "! <br>" + div.innerHTML;
-        if (div.length > 0) {
-            minion_Index = div[0].value;
-            div.innerHTML = "Champion has attacked Minion #" + minion_Index + "! <br>" + div.innerHTML;
-        }
-
-        $.ajax({
-            url: "Battle/Hit",
-            type: "get",*/
-            //data: { oldModel: @Model, abilityName: ability_Name, minionIndex: minion_Index},
-            /*success: function (data) {
-                $("#minionPartial").html(data);
-            },
-            error: function () {
-                alert("Something went wrong in controller.");
-            }
-        });
-    });*/
-
     $(".champAttack").click(function () {
+        var manaCost = $(this).attr('manaCost');
         var div = document.getElementById("battleDialogue");
         var champName = $(this).attr('champName');
         var abilityName = $(this).attr('value');
         var targetedMinion = $('.targeted div div div p').html()
+        var minionIndex = $('.targeted').attr('value');
         
         if (targetedMinion != null) {
-            div.innerHTML = champName + " has attacked a " + targetedMinion + " with " + abilityName + "! <br>" + div.innerHTML;
+            div.innerHTML = champName + " has attacked a #" + minionIndex + " " + targetedMinion + " with " + abilityName + "! <br>" + div.innerHTML;
         }
         else {
             div.innerHTML = "Need to target minion first! <br>" + div.innerHTML;
         }
+
+        Attack(champName, abilityName, manaCost, minionIndex);
+
     });
+
+    function Attack(name, ability, mana, index) {
+        var manaCost = mana;
+        var partyMemberIndex;
+        var damage;
+        var minionIndex = index;
+        if ('@Model.PartyMember1.Name' == name) {
+            damage = @Model.PartyMember1.Attack;
+            partyMemberIndex = 1;
+        }
+        else {
+            damage = @Model.PartyMember2.Attack;
+            partyMemberIndex = 2;
+        }
+
+        var minionHealth = $('.targeted span').html();
+        minionHealth -= damage;
+        $('.targeted span').html(minionHealth);
+
+        var currentMana = $('#partyMember2CurrentMana').html();
+        alert("current mana: " + currentMana);
+        currentMana -= manaCost;
+        $('#partyMember2CurrentMana').html(currentMana);
+        alert("mana cost: " + manaCost);
+    }
     
 </script>

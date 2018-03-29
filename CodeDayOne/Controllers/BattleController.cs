@@ -10,6 +10,7 @@ namespace CodeDayOne.Controllers
 {
     public class BattleController : Controller
     {
+        BattleViewModel globalModel = new BattleViewModel();
         public IActionResult Index(int partyMember1Id, int partyMember2Id)
         {
             var champions = LoadChampions();
@@ -20,16 +21,8 @@ namespace CodeDayOne.Controllers
                 PartyMember2 = champions.SingleOrDefault(c => c.ID == partyMember2Id),
                 IsRed = MinionsAreRed()
             };
+            globalModel = viewModel;
             return View(viewModel);
-        }
-
-        
-        public ActionResult Hit(BattleViewModel oldModel, string abilityName, int minionIndex)
-        {
-            var model = oldModel;
-            model.BattleMinionList.ElementAt(minionIndex).CurrentHealth -= 20;
-
-            return PartialView(model);
         }
 
         public List<Minion> LoadMinions()
