@@ -4,7 +4,7 @@
     <!-- Battle Minion List Start -->
     @for (var i = 0; i < Model.BattleMinionList.Count; i++)
     {
-        <div value="@i" class="row battleMinion" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px">
+        <div value="@i" class="row battleMinion" armor="@Model.BattleMinionList[i].Armor" magicResist="@Model.BattleMinionList[i].MagicResist" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px">
             <div class="col-md-6">
                 @if (Model.IsRed)
                 {

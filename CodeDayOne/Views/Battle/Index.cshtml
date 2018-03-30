@@ -28,20 +28,20 @@
                 </div>
                 <div class="col-md-6">
                     <h3><img src="https://i.imgur.com/fXyXzCk.png" /> <font color="red">@Model.PartyMember1.CurrentHealth/@Model.PartyMember1.MaxHealth</font></h3>
-                    <h3><img src="https://i.imgur.com/kAPA7h3.png" /> <font color="blue">@Model.PartyMember1.CurrentMana/@Model.PartyMember1.MaxMana</font></h3>
+                    <h3><img src="https://i.imgur.com/kAPA7h3.png" /> <font color="blue"><span id="partyMember1CurrentMana">@Model.PartyMember1.CurrentMana</span>/@Model.PartyMember1.MaxMana</font></h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <tr>
-                            <td><button manaCost="0" type="button" class="btn champAttack" champName="@Model.PartyMember1.Name" value="basic attack">Basic Attack</button></td>
+                            <td><button manaCost="0" type="button" class="btn champAttack" abilityType="physical" champName="@Model.PartyMember1.Name" value="basic attack">Basic Attack</button></td>
                             <td>0 Mana</td>
                         </tr>
                         @foreach (var ability in Model.PartyMember1.AbilityList)
                         {
                         <tr>
-                            <td><button manaCost="@ability.ManaCost" type="button" class="btn btn-primary champAttack" champName="@Model.PartyMember1.Name" value="@ability.Name">@ability.Name</button></td>
+                            <td><button manaCost="@ability.ManaCost" type="button" abilityType="@ability._DamageType" class="btn btn-primary champAttack" champName="@Model.PartyMember1.Name" value="@ability.Name">@ability.Name</button></td>
                             <td>@ability.ManaCost Mana</td>
                         </tr>
                         }
@@ -64,13 +64,13 @@
                 <div class="col-md-12">
                     <table class="table table-bordered">
                         <tr>
-                            <td><button manaCost="0" type="button" class="btn champAttack" champName="@Model.PartyMember2.Name" value="basic attack">Basic Attack</button></td>
+                            <td><button manaCost="0" type="button" class="btn champAttack" abilityType="physical" champName="@Model.PartyMember2.Name" value="basic attack">Basic Attack</button></td>
                             <td>0 Mana</td>
                         </tr>
                         @foreach (var ability in Model.PartyMember2.AbilityList)
                     {
                         <tr>
-                            <td><button manaCost="@ability.ManaCost" type="button" class="btn btn-danger champAttack" champName="@Model.PartyMember2.Name" value="@ability.Name">@ability.Name</button></td>
+                            <td><button manaCost="@ability.ManaCost" abilityType="@ability._DamageType" type="button" class="btn btn-danger champAttack" champName="@Model.PartyMember2.Name" value="@ability.Name">@ability.Name</button></td>
                             <td>@ability.ManaCost Mana</td>
                         </tr>
                 }
@@ -90,47 +90,105 @@
 
 <script>
     $(".champAttack").click(function () {
-        var manaCost = $(this).attr('manaCost');
         var div = document.getElementById("battleDialogue");
+
+        var manaCost = $(this).attr('manaCost');
+        var currentMana;
+    
         var champName = $(this).attr('champName');
         var abilityName = $(this).attr('value');
+        var abilityType = $(this).attr('abilityType');
+
         var targetedMinion = $('.targeted div div div p').html()
         var minionIndex = $('.targeted').attr('value');
-        
+        var minionArmor = $('.targeted').attr('armor');
+        var minionMagicResist = $('.targeted').attr('magicResist');
+
+        var partyMemberIndex;
+        if ('@Model.PartyMember1.Name' == name) {
+            partyMemberIndex = 1;
+            currentMana = $('#partyMember1CurrentMana').html();
+        }
+        else {
+            partyMemberIndex = 2;
+            currentMana = $('#partyMember2CurrentMana').html();
+        }
+
+        alert("player index: " + partyMemberIndex + " current mana: " + currentMana);
+
         if (targetedMinion != null) {
-            div.innerHTML = champName + " has attacked a #" + minionIndex + " " + targetedMinion + " with " + abilityName + "! <br>" + div.innerHTML;
+            if (CheckManaAmount(partyMemberIndex, currentMana, manaCost)) {
+                ResolveDamage(CalculateDamage(partyMemberIndex), abilityType, minionArmor, minionMagicResist);
+                div.innerHTML = AttackSummary(champName, abilityName, targetedMinion) + div.innerHTML;
+            }
+            else {
+                div.innerHTML = "Not enough mana to use that ability. <br>" + div.innerHTML;
+            }
         }
         else {
             div.innerHTML = "Need to target minion first! <br>" + div.innerHTML;
         }
-
-        Attack(champName, abilityName, manaCost, minionIndex);
-
     });
 
-    function Attack(name, ability, mana, index) {
-        var manaCost = mana;
-        var partyMemberIndex;
-        var damage;
-        var minionIndex = index;
-        if ('@Model.PartyMember1.Name' == name) {
-            damage = @Model.PartyMember1.Attack;
-            partyMemberIndex = 1;
+    function CheckManaAmount(partyMemberIndex, currentMana, manaCost) {
+        //not enough mana
+        if (manaCost > currentMana) {
+            return false;
         }
+        //enough mana; subtract most from current
         else {
-            damage = @Model.PartyMember2.Attack;
-            partyMemberIndex = 2;
+            currentMana -= manaCost;
+            //update mana on view
+            if (partyMemberIndex == 1) {
+                $('#partyMember1CurrentMana').html(currentMana);
+            }
+            else $('#partyMember2CurrentMana').html(currentMana);
+            return true;
         }
+    }
 
+    function CalculateDamage(partyMemberIndex) {
+        var damage;
+        if (partyMemberIndex == 1) damage = @Model.PartyMember1.Attack;
+        else damage = @Model.PartyMember2.Attack;
+        return damage;
+    }
+
+    function ResolveDamage(damage, abilityType, armor, magicResist) {
+        //reduce physical damage based on armor
+        if (abilityType == "physical") {
+            damage = Math.floor((damage * (100 - armor))/100);
+        }
+        //reduce magic damage based on magic resist
+        else damage = Math.floor((damage * (100 - magicResist))/100);
+
+        //update minion's health on view
         var minionHealth = $('.targeted span').html();
         minionHealth -= damage;
         $('.targeted span').html(minionHealth);
-
-        var currentMana = $('#partyMember2CurrentMana').html();
-        alert("current mana: " + currentMana);
-        currentMana -= manaCost;
-        $('#partyMember2CurrentMana').html(currentMana);
-        alert("mana cost: " + manaCost);
     }
+
+    function AttackSummary(champName, abilityName, minionName) {
+        return champName + " has attacked a " + minionName + " with " + abilityName + "! <br>";
+    }
+
+function Attack(name, ability, mana, index) {
+    var manaCost = mana;
     
+
+    var damage;
+    var minionIndex = index;
+
+
+    var minionHealth = $('.targeted span').html();
+    minionHealth -= damage;
+    $('.targeted span').html(minionHealth);
+
+
+    alert("current mana: " + currentMana);
+    currentMana -= manaCost;
+    $('#partyMember2CurrentMana').html(currentMana);
+    alert("mana cost: " + manaCost);
+}
+
 </script>
