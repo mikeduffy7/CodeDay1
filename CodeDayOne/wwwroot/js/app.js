@@ -1,6 +1,7 @@
 ﻿function highlightMinion(x) {
     var minions = document.querySelectorAll(".battleMinion");
     console.log = minions.length;
+    alert(minionHealth);
     if ($(x).hasClass("targeted")) {
         $(x).removeClass("targeted");
         $(x).removeAttr('id');
@@ -14,11 +15,5 @@
         $(x).css("background-color", "#fff375");
         $(x).addClass("targeted");
         $(x).attr('id', 'targeted');
-        //$(#minionIndex).attr('value', $(this).attr('value'));
     }
-    updateHiddenField();
-}
-
-function updateHiddenField() {
-    $('#minionIndex').attr('value', $('#targeted').attr('value'));
 }

@@ -97,7 +97,7 @@
         var abilityName = $(this).attr('value');
         var abilityType = $(this).attr('abilityType');
 
-        var targetedMinion = $('.targeted div div div p').html()
+        var targetedMinion = $('.targeted').attr('name');
         var minionIndex = parseInt($('.targeted').attr('value'));
         var minionArmor = parseInt($('.targeted').attr('armor'));
         var minionMagicResist = parseInt($('.targeted').attr('magicResist'));
@@ -111,9 +111,7 @@
             partyMemberIndex = 2;
             currentMana = parseInt($('#partyMember2CurrentMana').html());
         }
-
-        alert("champ name: " + champName + " player index: " + partyMemberIndex + " current mana: " + currentMana + " mana cost: " + manaCost);
-        alert(manaCost + " > " + currentMana);
+        
         if (targetedMinion != null) {
             if (manaCost > currentMana) {
                 div.innerHTML = "Not enough mana for this ability! <br>" + div.innerHTML;
@@ -157,7 +155,16 @@
         //update minion's health on view
         var minionHealth = $('.targeted span').html();
         minionHealth -= damage;
+        //health cannot be negative; reset to 0
+        if (minionHealth <= 0) minionHealth = 0;
         $('.targeted span').html(minionHealth);
+        //if minion dies remove .targeted class
+        if (minionHealth == 0) highlightMinion($('.targeted'));
+    }
+
+    function CheckIfDefenderDied() {
+
+
     }
 
     function AttackSummary(champName, abilityName, minionName) {
