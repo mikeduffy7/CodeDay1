@@ -158,13 +158,17 @@
         //health cannot be negative; reset to 0
         if (minionHealth <= 0) minionHealth = 0;
         $('.targeted span').html(minionHealth);
-        //if minion dies remove .targeted class
-        if (minionHealth == 0) highlightMinion($('.targeted'));
+        CheckIfDefenderDied(minionHealth);
     }
 
-    function CheckIfDefenderDied() {
-
-
+    function CheckIfDefenderDied(minionHealth) {
+        //if minion dies remove .targeted class
+        if (minionHealth == 0) {
+            $('.targeted').css("background-color", "#ff6666");
+            $('.targeted').addClass('dead');
+            $('.targeted').removeClass('battleMinion');
+            $('.targeted').removeClass("targeted");
+        }
     }
 
     function AttackSummary(champName, abilityName, minionName) {

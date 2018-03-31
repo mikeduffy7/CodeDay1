@@ -1,19 +1,25 @@
 ﻿function highlightMinion(x) {
-    var minions = document.querySelectorAll(".battleMinion");
-    console.log = minions.length;
-    alert(minionHealth);
-    if ($(x).hasClass("targeted")) {
-        $(x).removeClass("targeted");
-        $(x).removeAttr('id');
-        $(x).css("background-color", "#ffffff");
+    var div = document.getElementById("battleDialogue"); // div to show battle dialogue
+    var minions = document.querySelectorAll(".battleMinion"); // get all live minions
+
+    // can't target dead minion
+    if ($(x).hasClass('dead')) {
+        div.innerHTML = "Minion is dead and cannot be targeted. <br>" + div.innerHTML;
     }
     else {
-        for (var i = 0; i < minions.length; i++) {
-            minions[i].classList.remove("targeted");
-            minions[i].style.backgroundColor = "white";
+        // if minion is already targeted, this removes target class
+        if ($(x).hasClass("targeted")) {
+            $(x).removeClass("targeted");
+            $(x).css("background-color", "#ffffff");
         }
-        $(x).css("background-color", "#fff375");
-        $(x).addClass("targeted");
-        $(x).attr('id', 'targeted');
-    }
+        else {
+            // removes targeted class from all other minions
+            for (var i = 0; i < minions.length; i++) {
+                minions[i].classList.remove("targeted");
+                minions[i].style.backgroundColor = "white";
+            }     
+            $(x).css("background-color", "#fff375"); // highlights newly targeted minion
+            $(x).addClass("targeted"); // adds targeted class to clicked minion
+        }
+    }    
 }
