@@ -84,15 +84,13 @@
     </div>
 </div>
 
-<input id="minionIndex" type="hidden" />
-
 <p id="battleDialogue">Battle Dialogue:</p>
 
 <script>
     $(".champAttack").click(function () {
         var div = document.getElementById("battleDialogue");
 
-        var manaCost = $(this).attr('manaCost');
+        var manaCost = parseInt($(this).attr('manaCost'));
         var currentMana;
     
         var champName = $(this).attr('champName');
@@ -100,51 +98,45 @@
         var abilityType = $(this).attr('abilityType');
 
         var targetedMinion = $('.targeted div div div p').html()
-        var minionIndex = $('.targeted').attr('value');
-        var minionArmor = $('.targeted').attr('armor');
-        var minionMagicResist = $('.targeted').attr('magicResist');
+        var minionIndex = parseInt($('.targeted').attr('value'));
+        var minionArmor = parseInt($('.targeted').attr('armor'));
+        var minionMagicResist = parseInt($('.targeted').attr('magicResist'));
 
         var partyMemberIndex;
-        if ('@Model.PartyMember1.Name' == name) {
+        if (champName == '@Model.PartyMember1.Name') {
             partyMemberIndex = 1;
-            currentMana = $('#partyMember1CurrentMana').html();
+            currentMana = parseInt($('#partyMember1CurrentMana').html());
         }
-        else {
+        else if (champName == '@Model.PartyMember2.Name') {
             partyMemberIndex = 2;
-            currentMana = $('#partyMember2CurrentMana').html();
+            currentMana = parseInt($('#partyMember2CurrentMana').html());
         }
 
-        alert("player index: " + partyMemberIndex + " current mana: " + currentMana);
-
+        alert("champ name: " + champName + " player index: " + partyMemberIndex + " current mana: " + currentMana + " mana cost: " + manaCost);
+        alert(manaCost + " > " + currentMana);
         if (targetedMinion != null) {
-            if (CheckManaAmount(partyMemberIndex, currentMana, manaCost)) {
-                ResolveDamage(CalculateDamage(partyMemberIndex), abilityType, minionArmor, minionMagicResist);
-                div.innerHTML = AttackSummary(champName, abilityName, targetedMinion) + div.innerHTML;
+            if (manaCost > currentMana) {
+                div.innerHTML = "Not enough mana for this ability! <br>" + div.innerHTML;
             }
             else {
-                div.innerHTML = "Not enough mana to use that ability. <br>" + div.innerHTML;
+                ReduceManaAmount(partyMemberIndex, currentMana, manaCost);
+                ResolveDamage(CalculateDamage(partyMemberIndex), abilityType, minionArmor, minionMagicResist);
+                div.innerHTML = AttackSummary(champName, abilityName, targetedMinion) + div.innerHTML;
+
             }
         }
         else {
-            div.innerHTML = "Need to target minion first! <br>" + div.innerHTML;
+            div.innerHTML = "Must target a minion first. <br>" + div.innerHTML;
         }
     });
 
-    function CheckManaAmount(partyMemberIndex, currentMana, manaCost) {
-        //not enough mana
-        if (manaCost > currentMana) {
-            return false;
+    function ReduceManaAmount(partyMemberIndex, currentMana, manaCost) {
+        currentMana -= manaCost;
+        //update mana on view
+        if (partyMemberIndex == 1) {
+            $('#partyMember1CurrentMana').html(currentMana);
         }
-        //enough mana; subtract most from current
-        else {
-            currentMana -= manaCost;
-            //update mana on view
-            if (partyMemberIndex == 1) {
-                $('#partyMember1CurrentMana').html(currentMana);
-            }
-            else $('#partyMember2CurrentMana').html(currentMana);
-            return true;
-        }
+        else if(partyMemberIndex == 2) $('#partyMember2CurrentMana').html(currentMana);
     }
 
     function CalculateDamage(partyMemberIndex) {
@@ -171,24 +163,5 @@
     function AttackSummary(champName, abilityName, minionName) {
         return champName + " has attacked a " + minionName + " with " + abilityName + "! <br>";
     }
-
-function Attack(name, ability, mana, index) {
-    var manaCost = mana;
-    
-
-    var damage;
-    var minionIndex = index;
-
-
-    var minionHealth = $('.targeted span').html();
-    minionHealth -= damage;
-    $('.targeted span').html(minionHealth);
-
-
-    alert("current mana: " + currentMana);
-    currentMana -= manaCost;
-    $('#partyMember2CurrentMana').html(currentMana);
-    alert("mana cost: " + manaCost);
-}
 
 </script>
