@@ -10,10 +10,30 @@
 
 <hr />
 
-<div class="text-center">
-    <button class="btn btn-danger" id="createHordeButton" onclick="location.href='@Url.Action("Index", "Battle", new { partyMember1ID = Model.PartyMember1.ID, partyMember2Id = Model.PartyMember2.ID })'" type="button" >
-        Create Random Minion Horde
-    </button>
+<div class="row">
+    <div class="col-md-4 text-right">
+        <div class="col-md-6">
+            <img src="https://i.imgur.com/1IVcAQm.png" />
+        </div>
+        <div class="col-md-6 text-left">
+            <h1 id="partyGold">0</h1>
+        </div>
+    </div>
+    <div class="col-md-4 text-right">
+        <div class="col-md-6">
+            <img src="https://i.imgur.com/SV88cuS.png" />
+        </div>
+        <div class="col-md-6 text-left">
+            <h1 id="partyXP">0</h1>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="text-center">
+            <button class="btn btn-danger" id="createHordeButton" onclick="location.href='@Url.Action("Index", "Battle", new { partyMember1ID = Model.PartyMember1.ID, partyMember2Id = Model.PartyMember2.ID })'" type="button">
+                Create Random Minion Horde
+            </button>
+        </div>
+    </div>
 </div>
 
 <hr />
@@ -101,6 +121,8 @@
         var minionIndex = parseInt($('.targeted').attr('value'));
         var minionArmor = parseInt($('.targeted').attr('armor'));
         var minionMagicResist = parseInt($('.targeted').attr('magicResist'));
+        var minionGoldGiven = parseInt($('.targeted').attr('gold'));
+        var minionXpGiven = parseInt($('.targeted').attr('xp'));
 
         var partyMemberIndex;
         if (champName == '@Model.PartyMember1.Name') {
@@ -117,9 +139,16 @@
                 div.innerHTML = "Not enough mana for this ability! <br>" + div.innerHTML;
             }
             else {
+                var didDefenderDie = false;
                 ReduceManaAmount(partyMemberIndex, currentMana, manaCost);
-                ResolveDamage(CalculateDamage(partyMemberIndex), abilityType, minionArmor, minionMagicResist);
-                div.innerHTML = AttackSummary(champName, abilityName, targetedMinion) + div.innerHTML;
+                didDefenderDie = ResolveDamage(CalculateDamage(partyMemberIndex), abilityType, minionArmor, minionMagicResist);
+                div.innerHTML = AttackSummary(champName, abilityName, targetedMinion, didDefenderDie) + div.innerHTML;
+                if (didDefenderDie) {
+                    AddXpAndGoldToParty(minionGoldGiven, minionXpGiven);
+                    div.innerHTML = "The party has gained " + minionGoldGiven + " gold and " + minionXpGiven + " XP! <br>" + div.innerHTML;
+                    // Check to see if any minions are still alive
+                    div.innerHTML = AnyMinionsLeft() + div.innerHTML;
+                }
 
             }
         }
@@ -145,6 +174,7 @@
     }
 
     function ResolveDamage(damage, abilityType, armor, magicResist) {
+        var didDefenderDie = false;
         //reduce physical damage based on armor
         if (abilityType == "physical") {
             damage = Math.floor((damage * (100 - armor))/100);
@@ -158,21 +188,40 @@
         //health cannot be negative; reset to 0
         if (minionHealth <= 0) minionHealth = 0;
         $('.targeted span').html(minionHealth);
-        CheckIfDefenderDied(minionHealth);
+        didDefenderDie = CheckIfDefenderDied(minionHealth);
+        return didDefenderDie;
     }
 
     function CheckIfDefenderDied(minionHealth) {
+        var didDefenderDie = false;
         //if minion dies remove .targeted class
         if (minionHealth == 0) {
+            didDefenderDie = true;
             $('.targeted').css("background-color", "#ff6666");
             $('.targeted').addClass('dead');
             $('.targeted').removeClass('battleMinion');
             $('.targeted').removeClass("targeted");
         }
+        return didDefenderDie;
     }
 
-    function AttackSummary(champName, abilityName, minionName) {
-        return champName + " has attacked a " + minionName + " with " + abilityName + "! <br>";
+    function AttackSummary(champName, abilityName, minionName, didDefenderDie) {
+        if (didDefenderDie) return champName + " has killed a " + minionName + " with " + abilityName + "! <br>";
+        else return champName + " has attacked a " + minionName + " with " + abilityName + "! <br>";
+    }
+
+    function AddXpAndGoldToParty(goldGiven, xpGiven) {
+        var currentGold = parseInt($('#partyGold').html());
+        var currentXp = parseInt($('#partyXP').html());
+        currentGold += goldGiven;
+        currentXp += xpGiven;
+        $('#partyGold').html(currentGold);
+        $('#partyXP').html(currentXp);
+    }
+
+    function AnyMinionsLeft() {
+        var battleMinions = document.getElementsByClassName('battleMinion');
+        if (battleMinions.length == 0) return "The horde has been defeated! <br>";
     }
 
 </script>
