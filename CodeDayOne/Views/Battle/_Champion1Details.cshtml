@@ -1,0 +1,28 @@
+﻿@model CodeDayOne.Models.Champion
+
+<div class="row">
+    <div class="col-md-6">
+        <img class="champPicture" src="@Model.ImageSource" />
+    </div>
+    <div class="col-md-6">
+        <h3><img src="https://i.imgur.com/fXyXzCk.png" /> <font color="red"><span id="partyMember1CurrentHealth">@Model.CurrentHealth</span>/@Model.MaxHealth</font></h3>
+        <h3><img src="https://i.imgur.com/kAPA7h3.png" /> <font color="blue"><span id="partyMember1CurrentMana">@Model.CurrentMana</span>/@Model.MaxMana</font></h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <tr>
+                <td><button manaCost="0" type="button" class="btn champAttack" abilityType="physical" champName="@Model.Name" value="basic attack">Basic Attack</button></td>
+                <td>0 Mana</td>
+            </tr>
+            @foreach (var ability in Model.AbilityList)
+            {
+            <tr>
+                <td><button manaCost="@ability.ManaCost" type="button" abilityType="@ability._DamageType" class="btn btn-primary champAttack" champName="@Model.Name" value="@ability.Name">@ability.Name</button></td>
+                <td>@ability.ManaCost Mana</td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>

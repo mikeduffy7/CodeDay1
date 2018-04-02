@@ -40,62 +40,14 @@
 
 <div>
     <div class="row text-left">
-        <div class="col-md-4">
-            <!-- Party Member 1 Start -->
-            <div class="row">
-                <div class="col-md-6">
-                    <img class="champPicture" src="@Model.PartyMember1.ImageSource" />
-                </div>
-                <div class="col-md-6">
-                    <h3><img src="https://i.imgur.com/fXyXzCk.png" /> <font color="red">@Model.PartyMember1.CurrentHealth/@Model.PartyMember1.MaxHealth</font></h3>
-                    <h3><img src="https://i.imgur.com/kAPA7h3.png" /> <font color="blue"><span id="partyMember1CurrentMana">@Model.PartyMember1.CurrentMana</span>/@Model.PartyMember1.MaxMana</font></h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-bordered">
-                        <tr>
-                            <td><button manaCost="0" type="button" class="btn champAttack" abilityType="physical" champName="@Model.PartyMember1.Name" value="basic attack">Basic Attack</button></td>
-                            <td>0 Mana</td>
-                        </tr>
-                        @foreach (var ability in Model.PartyMember1.AbilityList)
-                        {
-                        <tr>
-                            <td><button manaCost="@ability.ManaCost" type="button" abilityType="@ability._DamageType" class="btn btn-primary champAttack" champName="@Model.PartyMember1.Name" value="@ability.Name">@ability.Name</button></td>
-                            <td>@ability.ManaCost Mana</td>
-                        </tr>
-                        }
-                    </table>
-                </div>
+        <div class="col-md-4"> <!-- Party Member 1 Start -->
+            <div id="partyMember1">
+                @{ Html.RenderPartial("_Champion1Details", Model.PartyMember1);}
             </div>
         </div> <!-- Party Member 1 End -->
-        <div class="col-md-4">
-            <!-- Party Member 2 Start -->
-            <div class="row">
-                <div class="col-md-6">
-                    <img class="champPicture" src="@Model.PartyMember2.ImageSource" />
-                </div>
-                <div class="col-md-6">
-                    <h3><img src="https://i.imgur.com/fXyXzCk.png" /> <font color="red">@Model.PartyMember2.CurrentHealth/@Model.PartyMember2.MaxHealth</font></h3>
-                    <h3><img src="https://i.imgur.com/kAPA7h3.png" /> <font color="blue"><span id="partyMember2CurrentMana">@Model.PartyMember2.CurrentMana</span>/@Model.PartyMember2.MaxMana</font></h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-bordered">
-                        <tr>
-                            <td><button manaCost="0" type="button" class="btn champAttack" abilityType="physical" champName="@Model.PartyMember2.Name" value="basic attack">Basic Attack</button></td>
-                            <td>0 Mana</td>
-                        </tr>
-                        @foreach (var ability in Model.PartyMember2.AbilityList)
-                    {
-                        <tr>
-                            <td><button manaCost="@ability.ManaCost" abilityType="@ability._DamageType" type="button" class="btn btn-danger champAttack" champName="@Model.PartyMember2.Name" value="@ability.Name">@ability.Name</button></td>
-                            <td>@ability.ManaCost Mana</td>
-                        </tr>
-                }
-                    </table>
-                </div>
+        <div class="col-md-4"> <!-- Party Member 2 Start -->
+            <div id="partyMember2">
+                @{ Html.RenderPartial("_Champion2Details", Model.PartyMember2);}
             </div>
         </div> <!-- Party Member 2 End -->
         <div id="minionPartial">
@@ -206,7 +158,7 @@
     }
 
     function AttackSummary(champName, abilityName, minionName, didDefenderDie) {
-        if (didDefenderDie) return champName + " has killed a " + minionName + " with " + abilityName + "! <br>";
+        if (didDefenderDie) return "<font color='red'>" + champName + " has killed a " + minionName + " with " + abilityName + "!</font> <br>";
         else return champName + " has attacked a " + minionName + " with " + abilityName + "! <br>";
     }
 
@@ -222,6 +174,7 @@
     function AnyMinionsLeft() {
         var battleMinions = document.getElementsByClassName('battleMinion');
         if (battleMinions.length == 0) return "The horde has been defeated! <br>";
+        else return "";
     }
 
 </script>
