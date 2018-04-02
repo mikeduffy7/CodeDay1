@@ -63,18 +63,17 @@
     </div>
 </div>
 
-<div>
-    @foreach (var character in Model.BattleOrder)
-    {
-        <div class="row">
-            <p>@character.Name</p>
-        </div>
-
-    }
-</div>
 <p id="battleDialogue">Battle Dialogue:</p>
 
 <script>
+    $(document).ready(function () {
+        alert($("[battleOrder = '0']").attr('src'));
+        $("[battleOrder = '0']").addClass('active');
+        $("[battleOrder = '0']").css('outline-color', 'blue');
+        $("[battleOrder = '0']").css('outline-style', 'solid');
+        $("[battleOrder = '0']").css('border', '2px');
+    });
+
     $(".champAttack").click(function () {
         var div = document.getElementById("battleDialogue");
 

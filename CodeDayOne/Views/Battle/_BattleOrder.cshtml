@@ -3,22 +3,24 @@
 <div class="row">
     <h5 class="text-center">ORDER</h5>
 </div>
-<div class="row text-center">
-    @foreach(var character in Model.BattleOrder){
-        if (character.ImageSource != null)
+<div id="battleOrder" class="row text-center">
+    @for (var i = 0; i < Model.BattleOrder.Count; i++)
+    {
+        if (@Model.BattleOrder[i].ImageSource != null)
         {
-            <img src="@character.ImageSource" height="48" width="48" />
+            <img class="orderPicture" battleOrder="@i" src="@Model.BattleOrder[i].ImageSource" height="48" width="48" />
         }
         else
         {
-            if (Model.IsRed)
+            if (@Model.IsRed)
             {
-                <img src="@character.RedImageURL" height="48" width="48" />
+                <img class="orderPicture" battleOrder="@i" src="@Model.BattleOrder[i].RedImageURL" height="48" width="48" />
             }
             else
             {
-                <img src="@character.BlueImageURL" height="48" width="48" />
+                <img class="orderPicture" battleOrder="@i" src="@Model.BattleOrder[i].BlueImageURL" height="48" width="48" />
             }
         }
     }
+    
 </div>
