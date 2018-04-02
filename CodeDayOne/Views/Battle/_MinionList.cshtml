@@ -1,30 +1,27 @@
 ﻿@model CodeDayOne.ViewModels.BattleViewModel
 
-<div id="minionBattleList" class="col-md-4">
-    <!-- Battle Minion List Start -->
-    @for (var i = 0; i < Model.BattleMinionList.Count; i++)
-    {
-        <div value="@i" class="row battleMinion" name="@Model.BattleMinionList[i].Name" gold="@Model.BattleMinionList[i].GoldGiven" xp="@Model.BattleMinionList[i].XPGiven" armor="@Model.BattleMinionList[i].Armor" magicResist="@Model.BattleMinionList[i].MagicResist" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px">
-            <div class="col-md-6">
-                @if (Model.IsRed)
-                {
-                    <img src="@Model.BattleMinionList[i].RedImageURL" />
-                }
-                else
-                {
-                    <img src="@Model.BattleMinionList[i].BlueImageURL" />
-                }
-            </div>
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <p>@Model.BattleMinionList[i].Name</p>
-                    </div>
-                    <div class="col-md-12">
-                        <img src="https://i.imgur.com/fXyXzCk.png" /> <span class="currentHealth">@Model.BattleMinionList[i].CurrentHealth</span>/@Model.BattleMinionList[i].MaxHealth
-                    </div>
+@for (var i = 0; i < Model.BattleMinionList.Count; i++)
+{
+    <div value="@i" class="row battleMinion" name="@Model.BattleMinionList[i].Name" gold="@Model.BattleMinionList[i].GoldGiven" xp="@Model.BattleMinionList[i].XPGiven" armor="@Model.BattleMinionList[i].Armor" magicResist="@Model.BattleMinionList[i].MagicResist" onclick="highlightMinion(this)" style="border-style: groove; border-radius: 5px">
+        <div class="col-md-6">
+            @if (Model.IsRed)
+            {
+                <img src="@Model.BattleMinionList[i].RedImageURL" />
+            }
+            else
+            {
+                <img src="@Model.BattleMinionList[i].BlueImageURL" />
+            }
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>@Model.BattleMinionList[i].Name</p>
+                </div>
+                <div class="col-md-12">
+                    <img src="https://i.imgur.com/fXyXzCk.png" /> <span class="currentHealth">@Model.BattleMinionList[i].CurrentHealth</span>/@Model.BattleMinionList[i].MaxHealth
                 </div>
             </div>
         </div>
-    }
-</div><!-- Battle Minion List End -->
+    </div>
+}

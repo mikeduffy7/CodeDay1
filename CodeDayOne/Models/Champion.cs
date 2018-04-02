@@ -10,7 +10,7 @@ namespace CodeDayOne.Models
         public int MaxMana { get; set; }
         public int CurrentMana { get; set; }
         public int XP { get; set; }
-        public string ImageSource { get; set; }
+        //public string ImageSource { get; set; }
         public SelectList AbilitySelectList { get; set; }
 
         public Champion(string name, int maxHealth, int attackSpeed, int attack,

@@ -16,7 +16,7 @@
             <img src="https://i.imgur.com/1IVcAQm.png" />
         </div>
         <div class="col-md-6 text-left">
-            <h1 id="partyGold">0</h1>
+            <h1 id="partyGold">@Model.Party.Gold</h1>
         </div>
     </div>
     <div class="col-md-4 text-right">
@@ -24,7 +24,7 @@
             <img src="https://i.imgur.com/SV88cuS.png" />
         </div>
         <div class="col-md-6 text-left">
-            <h1 id="partyXP">0</h1>
+            <h1 id="partyXP">@Model.Party.XP</h1>
         </div>
     </div>
     <div class="col-md-4">
@@ -50,12 +50,28 @@
                 @{ Html.RenderPartial("_ChampionDetails", Model.PartyMember2);}
             </div>
         </div> <!-- Party Member 2 End -->
-        <div id="minionPartial">
-            @{Html.RenderPartial("_MinionList", Model);}
+        <div class="col-md-3">
+            <div id="minionPartial">
+                @{Html.RenderPartial("_MinionList", Model);}
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div id="battleOrderPartial">
+                @{ Html.RenderPartial("_BattleOrder", Model);}
+            </div>
         </div>
     </div>
 </div>
 
+<div>
+    @foreach (var character in Model.BattleOrder)
+    {
+        <div class="row">
+            <p>@character.Name</p>
+        </div>
+
+    }
+</div>
 <p id="battleDialogue">Battle Dialogue:</p>
 
 <script>

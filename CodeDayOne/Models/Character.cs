@@ -13,6 +13,9 @@ namespace CodeDayOne.Models
         public int Armor { get; set; }
         public int MagicResist { get; set; }
         public List<Ability> AbilityList { get; set; }
+        public string ImageSource { get; set; }
+        public string BlueImageURL { get; set; }
+        public string RedImageURL { get; set; }
 
         public Character(string name, int maxHealth, int attackSpeed, int attack, 
                          int armor, int magicResist)
