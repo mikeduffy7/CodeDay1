@@ -42,12 +42,12 @@
     <div class="row text-left">
         <div class="col-md-4"> <!-- Party Member 1 Start -->
             <div id="partyMember1">
-                @{ Html.RenderPartial("_Champion1Details", Model.PartyMember1);}
+                @{ Html.RenderPartial("_ChampionDetails", Model.PartyMember1);}
             </div>
         </div> <!-- Party Member 1 End -->
         <div class="col-md-4"> <!-- Party Member 2 Start -->
             <div id="partyMember2">
-                @{ Html.RenderPartial("_Champion2Details", Model.PartyMember2);}
+                @{ Html.RenderPartial("_ChampionDetails", Model.PartyMember2);}
             </div>
         </div> <!-- Party Member 2 End -->
         <div id="minionPartial">
@@ -79,11 +79,11 @@
         var partyMemberIndex;
         if (champName == '@Model.PartyMember1.Name') {
             partyMemberIndex = 1;
-            currentMana = parseInt($('#partyMember1CurrentMana').html());
+            currentMana = parseInt($('#partyMember1').find('.currentMana').html());
         }
         else if (champName == '@Model.PartyMember2.Name') {
             partyMemberIndex = 2;
-            currentMana = parseInt($('#partyMember2CurrentMana').html());
+            currentMana = parseInt($('#partyMember2').find('.currentMana').html());
         }
         
         if (targetedMinion != null) {
@@ -113,9 +113,9 @@
         currentMana -= manaCost;
         //update mana on view
         if (partyMemberIndex == 1) {
-            $('#partyMember1CurrentMana').html(currentMana);
+            $('#partyMember1').find('.currentMana').html(currentMana);
         }
-        else if(partyMemberIndex == 2) $('#partyMember2CurrentMana').html(currentMana);
+        else if(partyMemberIndex == 2) $('#partyMember2').find('.currentMana').html(currentMana);
     }
 
     function CalculateDamage(partyMemberIndex) {
