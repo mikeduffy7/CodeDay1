@@ -1,6 +1,8 @@
 ﻿@model CodeDayOne.ViewModels.BattleViewModel
 <script src="~/lib/jquery/dist/jquery.js" type="text/javascript"></script>
 <script src="~/js/app.js" type="text/javascript"></script>
+<link href="@Url.Content("~/css/battle.css")" rel="stylesheet" type="text/css" />
+
 @{
     ViewData["Title"] = "BattleScreen";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -66,15 +68,15 @@
 <p id="battleDialogue">Battle Dialogue:</p>
 
 <script>
+    var characterCount = parseInt(@Model.BattleOrder.Count - 1);
+
     $(document).ready(function () {
-        alert($("[battleOrder = '0']").attr('src'));
         $("[battleOrder = '0']").addClass('active');
-        $("[battleOrder = '0']").css('outline-color', 'blue');
-        $("[battleOrder = '0']").css('outline-style', 'solid');
-        $("[battleOrder = '0']").css('border', '2px');
     });
 
     $(".champAttack").click(function () {
+        var battleIndex = $('.active').attr('battleOrder');
+
         var div = document.getElementById("battleDialogue");
 
         var manaCost = parseInt($(this).attr('manaCost'));
@@ -116,7 +118,7 @@
                     // Check to see if any minions are still alive
                     div.innerHTML = AnyMinionsLeft() + div.innerHTML;
                 }
-
+                HighlightNextInBattleOrder(battleIndex, characterCount);
             }
         }
         else {
@@ -190,6 +192,13 @@
         var battleMinions = document.getElementsByClassName('battleMinion');
         if (battleMinions.length == 0) return "The horde has been defeated! <br>";
         else return "";
+    }
+
+    function HighlightNextInBattleOrder(battleIndex, characterCount) {
+        $('.active').removeClass('active');
+        battleIndex++;
+        if (battleIndex > characterCount) battleIndex = 0;
+        $("[battleOrder = '" + battleIndex + "']").addClass('active');
     }
 
 </script>

@@ -1,0 +1,22 @@
+﻿Battle Screen
+- battle order
+  - update pics w/highlight
+  - give character ".active" to attack
+    - disable champ buttons when not active
+- create minion attacks
+  - methods should be global; not specific
+    - i.e.: should not have 1 method for minion attack and 1 for champion attack
+- resolve battle
+  - all minions dead --> pop open different view
+  - all champs dead --> game over>
+- create different minions
+  - jungle minions
+  - dragon
+  - Baron
+  *** random roll for minions vs. other creatures?
+- fight against different champs
+  - currently award NO gold or XP
+- item use during battle
+  - health and mana potions
+  - actives on other items
+- run from a battle
