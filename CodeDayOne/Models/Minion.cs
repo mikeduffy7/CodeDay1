@@ -15,6 +15,7 @@ namespace CodeDayOne.Models
         {
             this.GoldGiven = goldGiven;
             this.XPGiven = xpGiven;
+            this.Type = CharacterType.minion;
         }
     }
 }

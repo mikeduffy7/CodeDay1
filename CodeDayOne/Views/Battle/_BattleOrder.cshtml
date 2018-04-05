@@ -8,19 +8,28 @@
     {
         if (@Model.BattleOrder[i].ImageSource != null)
         {
-            <img class="orderPicture" battleOrder="@i" src="@Model.BattleOrder[i].ImageSource" height="48" width="48" />
+            if (Model.BattleOrder[i].Name == Model.PartyMember1.Name)
+            {
+                <img class="orderPicture" charType="@Model.BattleOrder[i].Type" name="@Model.BattleOrder[i].Name" id="1" battleOrder="@i" src="@Model.BattleOrder[i].ImageSource" height="48" width="48" />
+            }
+            else if (Model.BattleOrder[i].Name == Model.PartyMember2.Name)
+            {
+
+                <img class="orderPicture" charType="@Model.BattleOrder[i].Type" name="@Model.BattleOrder[i].Name" id="2" battleOrder="@i" src="@Model.BattleOrder[i].ImageSource" height="48" width="48" />
+            }
+
         }
         else
         {
             if (@Model.IsRed)
             {
-                <img class="orderPicture" battleOrder="@i" src="@Model.BattleOrder[i].RedImageURL" height="48" width="48" />
+                <img class="orderPicture" charType="@Model.BattleOrder[i].Type" id="@Model.BattleOrder[i].ID" battleOrder="@i" src="@Model.BattleOrder[i].RedImageURL" height="48" width="48" />
             }
             else
             {
-                <img class="orderPicture" battleOrder="@i" src="@Model.BattleOrder[i].BlueImageURL" height="48" width="48" />
+                <img class="orderPicture" charType="@Model.BattleOrder[i].Type" id="@Model.BattleOrder[i].ID" battleOrder="@i" src="@Model.BattleOrder[i].BlueImageURL" height="48" width="48" />
             }
         }
     }
-    
+
 </div>

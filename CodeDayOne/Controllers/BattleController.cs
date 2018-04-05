@@ -22,6 +22,8 @@ namespace CodeDayOne.Controllers
                 PartyMember2 = champions.SingleOrDefault(c => c.ID == partyMember2Id),
                 IsRed = MinionsAreRed()
             };
+            viewModel.PartyMember1.ID = 1;
+            viewModel.PartyMember2.ID = 2;
             foreach (var minion in viewModel.BattleMinionList)
             {
                 viewModel.BattleOrder.Add(minion);
@@ -149,18 +151,19 @@ namespace CodeDayOne.Controllers
 
             for (var i = 0; i < numberOfMinions; i++)
             {
-                minionList.Add(RandomMinion());
+                minionList.Add(RandomMinion(i));
             }
 
             return minionList;
         }
 
-        public Minion RandomMinion()
+        public Minion RandomMinion(int id)
         {
             var minions = LoadMinions();
             var random = new Random();
             var index = random.Next(0, minions.Count);
             Minion randomMinion = minions[index];
+            randomMinion.ID = id;
             return randomMinion;
         }
     }

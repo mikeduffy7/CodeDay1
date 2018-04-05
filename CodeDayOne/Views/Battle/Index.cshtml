@@ -71,7 +71,14 @@
     var characterCount = parseInt(@Model.BattleOrder.Count - 1);
 
     $(document).ready(function () {
-        $("[battleOrder = '0']").addClass('active');
+        alert("Member 1 ID: " + @Model.BattleOrder[0].ID + "   Member 2 ID: " + @Model.BattleOrder[1].ID);
+        var div = $("[battleOrder = 0]");
+        div.addClass('active');
+        var id = div.attr('id');
+        var charType = div.attr('charType');
+        if (charType == "champion") {
+            $(".champRow[id='" + id + "']").addClass('active');
+        }
     });
 
     $(".champAttack").click(function () {

@@ -16,6 +16,8 @@ namespace CodeDayOne.Models
         public string ImageSource { get; set; }
         public string BlueImageURL { get; set; }
         public string RedImageURL { get; set; }
+        public CharacterType Type { get; set; }
+        public int ID { get; set; }
 
         public Character(string name, int maxHealth, int attackSpeed, int attack, 
                          int armor, int magicResist)
@@ -28,6 +30,12 @@ namespace CodeDayOne.Models
             this.Armor = armor;
             this.MagicResist = magicResist;
             this.AbilityList = new List<Ability>();
+        }
+
+        public enum CharacterType
+        {
+            champion,
+            minion
         }
     }
 }

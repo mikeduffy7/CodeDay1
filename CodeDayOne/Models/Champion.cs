@@ -21,6 +21,7 @@ namespace CodeDayOne.Models
             this.CurrentMana = maxMana;
             this.XP = 0;
             this.ID = id;
+            this.Type = CharacterType.champion;
             //ImageSource creates the URL to grab a champion's image from the LoL website
             this.ImageSource = "https://ddragon.leagueoflegends.com/cdn/8.3.1/img/champion/" + name + ".png";
         }
