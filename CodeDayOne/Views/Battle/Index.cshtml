@@ -71,7 +71,6 @@
     var characterCount = parseInt(@Model.BattleOrder.Count - 1);
 
     $(document).ready(function () {
-        alert("Member 1 ID: " + @Model.BattleOrder[0].ID + "   Member 2 ID: " + @Model.BattleOrder[1].ID);
         var div = $("[battleOrder = 0]");
         div.addClass('active');
         var id = div.attr('id');
@@ -79,10 +78,13 @@
         if (charType == "champion") {
             $(".champRow[id='" + id + "']").addClass('active');
         }
+        else if (charType == "minion") {
+            $(".battleMinion[id='" + id + "']").addClass('active');
+        }
     });
 
     $(".champAttack").click(function () {
-        var battleIndex = $('.active').attr('battleOrder');
+        var battleIndex = parseInt($('.orderPicture.active').attr('battleOrder'));
 
         var div = document.getElementById("battleDialogue");
 
@@ -175,6 +177,8 @@
             didDefenderDie = true;
             $('.targeted').css("background-color", "#ff6666");
             $('.targeted').addClass('dead');
+            var id = $('.targeted').attr('id');
+            $('.orderPicture[id = "' + id + '"]').addClass('dead').removeClass('active');
             $('.targeted').removeClass('battleMinion');
             $('.targeted').removeClass("targeted");
         }
@@ -202,10 +206,35 @@
     }
 
     function HighlightNextInBattleOrder(battleIndex, characterCount) {
-        $('.active').removeClass('active');
+        var charType = $('.orderPicture.active').attr('charType');
+        if (charType == "champion") {
+            $('.champRow.active').removeClass('active');
+        }
+        else if (charType == "minion") {
+            $('.battleMinion.active').removeClass('active');
+        }
+        $('.orderPicture.active').removeClass('active');
         battleIndex++;
         if (battleIndex > characterCount) battleIndex = 0;
         $("[battleOrder = '" + battleIndex + "']").addClass('active');
+        var id = $("[battleOrder = '" + battleIndex + "']").attr('id');
+        alert(id);
+        var charType = $("[battleOrder = '" + battleIndex + "']").attr('charType');
+        alert(charType);
+        if (charType == "champion") {
+            $('.champRow[id = "' + id + '"]').addClass('active');
+            if ($('.champRow[id = "' + id + '"]').hasClass('dead')) {
+                HighlightNextInBattleOrder(battleIndex, characterCount);
+            }
+        }
+        else if (charType == "minion") {
+            $('.battleMinion[id = "' + id + '"]').addClass('active');
+            if ($('.battleMinion.active').hasClass('dead')) {
+                alert(true);
+                HighlightNextInBattleOrder(battleIndex, characterCount);
+            }
+        }
+        
     }
 
 </script>
