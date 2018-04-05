@@ -127,7 +127,7 @@
                     // Check to see if any minions are still alive
                     div.innerHTML = AnyMinionsLeft() + div.innerHTML;
                 }
-                HighlightNextInBattleOrder(battleIndex, characterCount);
+                HighlightNextInBattleOrder(battleIndex);
             }
         }
         else {
@@ -205,36 +205,32 @@
         else return "";
     }
 
-    function HighlightNextInBattleOrder(battleIndex, characterCount) {
+    function HighlightNextInBattleOrder(battleIndex) {
         var charType = $('.orderPicture.active').attr('charType');
         if (charType == "champion") {
             $('.champRow.active').removeClass('active');
         }
         else if (charType == "minion") {
-            $('.battleMinion.active').removeClass('active');
+            $('.minionRow.active').removeClass('active');
         }
         $('.orderPicture.active').removeClass('active');
         battleIndex++;
         if (battleIndex > characterCount) battleIndex = 0;
         $("[battleOrder = '" + battleIndex + "']").addClass('active');
         var id = $("[battleOrder = '" + battleIndex + "']").attr('id');
-        alert(id);
         var charType = $("[battleOrder = '" + battleIndex + "']").attr('charType');
-        alert(charType);
         if (charType == "champion") {
             $('.champRow[id = "' + id + '"]').addClass('active');
-            if ($('.champRow[id = "' + id + '"]').hasClass('dead')) {
-                HighlightNextInBattleOrder(battleIndex, characterCount);
-            }
         }
         else if (charType == "minion") {
             $('.battleMinion[id = "' + id + '"]').addClass('active');
-            if ($('.battleMinion.active').hasClass('dead')) {
-                alert(true);
-                HighlightNextInBattleOrder(battleIndex, characterCount);
-            }
         }
-        
+    }
+
+    function NewHighlightedCharacterIsDead(battleIndex) {
+        if ($("[battleOrder = '" + battleIndex + "']").hasClass('dead')) {
+            return true;
+        }
     }
 
 </script>
